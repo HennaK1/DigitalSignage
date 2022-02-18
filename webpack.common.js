@@ -1,23 +1,25 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ESLintPlugin = require('eslint-webpack-plugin');
-const {CleanWebpackPlugin} = require('clean-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = {
   entry: {
     app: './src/index.js',
+    import: 'bootstrap/dist/css/bootstrap.min.css',
   },
   plugins: [
     new CleanWebpackPlugin(),
     new CopyPlugin({
       patterns: [
-      {
-        from: 'assets/',
-        to: 'assets/',
-        context: 'src/',
-      },
-    ]}),
+        {
+          from: 'assets/',
+          to: 'assets/',
+          context: 'src/',
+        },
+      ]
+    }),
     new HtmlWebpackPlugin({
       title: 'WTMP Starter',
       meta: {
@@ -47,6 +49,14 @@ module.exports = {
         use: [
           'file-loader'
         ]
+      }
+    ]
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   }
