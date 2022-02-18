@@ -1,3 +1,162 @@
-body {
-  margin: 10%;
+@font-face {
+  font-family: normaaliteksti;
+  src: url(fonts/Roboto-Regular.ttf);
 }
+
+@font-face {
+  font-family: boldattuteksti;
+  src: url(fonts/Roboto-Bold.ttf);
+}
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --metropolia-oranssi: #e85d0c;
+}
+
+.logo {
+  width: 200px;
+}
+
+.language {
+  width: 50px;
+}
+
+body {
+  background-color: rgb(245, 245, 245);
+  font-family: normaaliteksti;
+  height: 100vh;
+  width: 100%;
+}
+
+
+.nav-container {
+  height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.nav-container li {
+  padding: 5px 10px;
+}
+
+.nav-container li a {
+  color: black;
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.active {
+  font-family: boldattuteksti;
+  letter-spacing: 2px;
+  color: white !important;
+  background-color: var(--metropolia-oranssi);
+  border-radius: 10px;
+}
+
+.pushright {
+  margin-left: auto;
+}
+
+.pushleft {
+  margin-right: auto;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: 300px 300px;
+    column-gap: 30px;
+    row-gap: 10px;
+    margin: 0 20px;
+    justify-items: center;
+}
+
+
+.card {
+  margin: 10px;
+  box-shadow: rgba(61, 61, 61, 0.4) 0px 2px 8px 0px;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  align-items: center;
+  padding-left: 20px;
+}
+
+.card-header h2 {
+  text-transform: uppercase;
+  font-family: boldattuteksti;
+  letter-spacing: 1px;
+  color: var(--metropolia-oranssi);
+}
+
+.card-content {
+  background-color: white;
+  height: 100%;
+  padding: 18px 15px;
+  flex-basis: 70%;
+  display: flex;
+  flex-flow: column;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-size: 1em;
+}
+
+.weather-content {
+  display: flex;
+  align-items: center;
+}
+
+
+.card-img-container {
+  flex-basis: 30%;
+  height: 100%;
+  width: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-text {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+.menu-list {
+  list-style: none;
+  padding-left: 20px;
+}
+
+.menu-list li {
+  margin-top: 10px;
+}
+
+/*Värejä
+Metropolia oranssi: #e85d0c*/

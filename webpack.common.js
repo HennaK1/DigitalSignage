@@ -7,7 +7,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 module.exports = {
   entry: {
     app: './src/index.js',
-    import: 'bootstrap/dist/css/bootstrap.min.css',
   },
   plugins: [
     new CleanWebpackPlugin(),
@@ -52,12 +51,4 @@ module.exports = {
       }
     ]
   },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ['style-loader', 'css-loader']
-      }
-    ]
-  }
 };
