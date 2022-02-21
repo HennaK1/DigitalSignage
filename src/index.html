@@ -1,14 +1,92 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="assets/styles.css">
-  </head>
-  <body>
-    <p>
-      Branch for Jenna<br />
-      Start by editing the files in <code>src/</code> folder.
-    </p>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+
+  <!-- Navigaatio -->
+  <nav>
+    <ul class="nav-container">
+      <li class="pushleft nav-link">
+        <a href="#">
+          <img class="logo" src="assets/img/metropolia_logo.svg" alt="metropolian logo">
+        </a></li>
+      <li class="nav-link"><a class="active" href="#">Karaportti</a></li>
+      <li class="nav-link"><a href="#">Myyrmäki</a></li>
+      <li class="nav-link"><a href="#">Myllypuro</a></li>
+      <li class="nav-link"><a href="#">Arabia</a></li>
+      <li class="pushright nav-link">
+        <a href="#">
+          <img class="language" src="assets/img/finland.png" alt="suomen lippu">
+        </a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <div class="grid-container">
+      <!-- Koronatiedote -->
+      <article class="card infoarea">
+        <div class="card-img-container">
+          <img class="card-img" src="assets/img/koronatiedote.webp" alt="kuva koronamaskista">
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2>Koronatiedote</h2>
+          </div>
+          <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, nostrum consectetur.
+            Voluptatum laborum
+            animi quam itaque dolores in sequi velit aspernatur explicabo, enim vel incidunt deserunt tempore quasi ex
+            aliquid.
+            Corporis consequuntur doloribus, ipsa voluptatum exercitationem perspiciatis quia impedit quos, quis laborum
+            amet ducimus voluptatibus unde animi fuga nulla reprehenderit modi. Dolorem possimus maxime atque, magnam
+            praesentium voluptas molestias ea!</p>
+        </div>
+      </article>
+      <!-- Sää -->
+      <article class="card weatherarea">
+        <div class="card-content weather-content">
+          <div class="card-header">
+            <h2>Sää</h2>
+          </div>
+          <p class="card-text">Tähän tulee hieno sää</p>
+        </div>
+      </article>
+      <!-- Ruokalista -->
+      <article class="card luncharea">
+        <div class="card-img-container">
+          <img class="card-img" src="assets/img/ruokakuva.webp" alt="kuva ruuasta">
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2>Ruokalista</h2>
+          </div>
+          <ul class="menu-list">
+            <li>- Maiores illum deleniti officiis facilis</li>
+            <li>- Laboriosam eveniet maiores dolores ratione facilis tempora</li>
+            <li>- Dignissimos deserunt rem eos nisi ut nesciunt, consequuntur reprehenderit</li>
+            <li>- Perspiciatis illum nobis harum ab sapiente</li>
+            <li>- Optio explicabo aliquam repudiandae enim fugiat</li>
+            <li>- Ut aut voluptatibus dicta</li>
+          </ul>
+        </div>
+      </article>
+      <!-- HSL -->
+      <article class="card transitarea">
+        <div class="card-content weather-content">
+          <div class="card-header">
+            <h2>HSL</h2>
+          </div>
+          <p class="card-text">Tähän tulee hienot bussiaikataulut</p>
+        </div>
+      </article>
+    </div>
+  </main>
+
+</body>
+
 </html>
