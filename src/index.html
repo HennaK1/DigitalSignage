@@ -13,20 +13,34 @@
 
   <!-- Navigaatio -->
   <nav>
+    <div>
+      <a href="#">
+        <img class="logo" src="assets/img/metropolia_logo.svg" alt="metropolian logo">
+      </a>
+    </div>
+
+    <label class="nav-label" for="toggleCheck"><img class="down-arrow" src="assets/img/arrow-down.png"
+        alt="arrow-down"></label>
+    <input type="checkbox" id="toggleCheck">
+
     <ul class="nav-container">
-      <li class="pushleft nav-link">
-        <a href="#">
-          <img class="logo" src="assets/img/metropolia_logo.svg" alt="metropolian logo">
-        </a></li>
       <li class="nav-link"><a class="active" href="#">Karamalmi</a></li>
       <li class="nav-link"><a href="#">Myyrmäki</a></li>
       <li class="nav-link"><a href="#">Myllypuro</a></li>
       <li class="nav-link"><a href="#">Arabia</a></li>
-      <li class="pushright nav-link">
-        <a href="#">
-          <img class="language" src="assets/img/finland.png" alt="suomen lippu">
-        </a></li>
     </ul>
+
+    <div class="language-container">
+      <img class="language" src="assets/img/finland.png" alt="suomen lippu">
+      <label class="language-label" for="toggleCheckLanguage"><img class="arrowdown" src="assets/img/simple-arrow.png"
+          alt="nuoli alaspäin"></label>
+      <input type="checkbox" id="toggleCheckLanguage">
+      <ul class="language-list">
+        <li class="language-list-item"><img class="language" src="assets/img/united-kingdom.png" alt="britannian lippu">
+        </li>
+      </ul>
+    </div>
+    <div class="grey"></div>
   </nav>
 
   <main>
@@ -39,6 +53,7 @@
         <div class="card-content">
           <div class="card-header">
             <h2>Koronatiedote</h2>
+            <h3 class="campus">Karaportti</h3>
           </div>
           <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, nostrum consectetur.
             Voluptatum laborum
@@ -71,24 +86,25 @@
         <div class="card-content">
           <div class="card-header">
             <h2>Ruokalista</h2>
+            <h3 class="campus">Karaportti</h3>
           </div>
           <ul class="menu-list">
-            <li>- Maiores illum deleniti officiis facilis</li>
-            <li>- Laboriosam eveniet maiores dolores ratione facilis tempora</li>
-            <li>- Dignissimos deserunt rem eos nisi ut nesciunt, consequuntur reprehenderit</li>
-            <li>- Perspiciatis illum nobis harum ab sapiente</li>
-            <li>- Optio explicabo aliquam repudiandae enim fugiat</li>
-            <li>- Ut aut voluptatibus dicta</li>
+            <li>Maiores illum deleniti officiis facilis</li>
+            <li>Laboriosam eveniet maiores dolores ratione facilis tempora</li>
+            <li>Dignissimos deserunt rem eos nisi ut nesciunt, consequuntur reprehenderit</li>
+            <li>Perspiciatis illum nobis harum ab sapiente</li>
+            <li>Optio explicabo aliquam repudiandae enim fugiat</li>
+            <li>Ut aut voluptatibus dicta</li>
           </ul>
         </div>
       </article>
       <!-- HSL -->
       <article class="card transitarea">
-        <div class="card-content weather-content">
-          <div class="card-header">
+        <div class="card-content small hsl-content">
+          <div class="card-header small-header">
             <h2>HSL</h2>
           </div>
-          <p class="card-text">Tähän tulee hienot bussiaikataulut</p>
+          <p class="card-text card-small-text">Tähän tulee hienot bussiaikataulut</p>
         </div>
       </article>
     </div>
