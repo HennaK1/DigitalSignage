@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://kit.fontawesome.com/8730c9b44a.js" crossorigin="anonymous"></script>
+  <script src="assets/weather.js"></script>
 </head>
 
 <body>
@@ -16,7 +18,7 @@
         <a href="#">
           <img class="logo" src="assets/img/metropolia_logo.svg" alt="metropolian logo">
         </a></li>
-      <li class="nav-link"><a class="active" href="#">Karaportti</a></li>
+      <li class="nav-link"><a class="active" href="#">Karamalmi</a></li>
       <li class="nav-link"><a href="#">Myyrmäki</a></li>
       <li class="nav-link"><a href="#">Myllypuro</a></li>
       <li class="nav-link"><a href="#">Arabia</a></li>
@@ -51,9 +53,14 @@
       <article class="card weatherarea">
         <div class="card-content weather-content">
           <div class="card-header">
-            <h2>Sää</h2>
+            <h2 class="city"><i class="fa-solid fa-map-pin"></i>Karamalmi</h2>
           </div>
-          <p class="card-text">Tähän tulee hieno sää</p>
+          <div class="weather">
+            <img src="" alt="" class="icon">
+            <div class="temp"></div>
+            <div class="description"></div>
+          </div>
+          <!-- <p class="card-text">Tähän tulee hieno sää</p> -->
         </div>
       </article>
       <!-- Ruokalista -->
