@@ -8,6 +8,7 @@
   src: url(fonts/Roboto-Bold.ttf);
 }
 
+/* PERUS TYYLITTELYT */
 
 * {
   margin: 0;
@@ -17,14 +18,9 @@
 
 :root {
   --metropolia-oranssi: #e85d0c;
-}
-
-.logo {
-  width: 200px;
-}
-
-.language {
-  width: 50px;
+  --metropolia-harmaa: #696b6f;
+  --hsl-sininen: #307ac3;
+  --background-color: rgb(245, 245, 245);
 }
 
 body {
@@ -34,6 +30,38 @@ body {
   width: 100%;
 }
 
+/* NAVIGAATIO */
+
+.logo {
+  width: 200px;
+  margin: 0 25px;
+}
+
+.language-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.language {
+  width: 50px;
+  margin: 0 10px;
+}
+
+.arrowdown {
+  width: 15px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+nav {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
 
 .nav-container {
   height: 4.5rem;
@@ -65,24 +93,19 @@ body {
   border-radius: 10px;
 }
 
-.pushright {
-  margin-left: auto;
-}
-
-.pushleft {
-  margin-right: auto;
-}
+/* GRID */
 
 .grid-container {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-rows: 300px 300px;
+    grid-template-rows: 320px 320px;
     column-gap: 30px;
     row-gap: 10px;
     margin: 0 20px;
     justify-items: center;
 }
 
+/* KORTIT */
 
 .card {
   margin: 10px;
@@ -99,7 +122,8 @@ body {
 
 .card-header {
   display: flex;
-  align-items: center;
+  flex-flow: column;
+  align-items: flex-start;
   padding-left: 20px;
 }
 
@@ -110,6 +134,15 @@ body {
   color: var(--metropolia-oranssi);
 }
 
+.campus {
+  margin-top: 3px;
+  font-family: boldattuteksti;
+  font-size: 0.9em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--metropolia-harmaa);
+}
+
 .card-content {
   background-color: white;
   height: 100%;
@@ -117,16 +150,22 @@ body {
   flex-basis: 70%;
   display: flex;
   flex-flow: column;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
   font-size: 1em;
 }
 
-.weather-content {
-  display: flex;
-  align-items: center;
+.small {
+  padding: 18px 0;
+  width: 100%;
 }
 
+.small-header {
+  padding-left: 0;
+}
+
+.card-small-text {
+  padding-left: 0 !important;
+  text-align: center;
+}
 
 .card-img-container {
   flex-basis: 30%;
@@ -149,14 +188,194 @@ body {
   padding-left: 20px;
 }
 
+/* SÄÄ -KORTTI */
+
+.weather-content {
+  display: flex;
+  align-items: center;
+}
+
+/* MENU -KORTTI */
+
 .menu-list {
-  list-style: none;
-  padding-left: 20px;
+  list-style: circle;
+  padding-left: 40px;
 }
 
 .menu-list li {
   margin-top: 10px;
 }
 
-/*Värejä
-Metropolia oranssi: #e85d0c*/
+/* HSL -KORTTI*/
+
+.transitarea {
+  background-color: var(--hsl-sininen);
+}
+
+.hsl-content {
+  background-color: var(--hsl-sininen);
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.hsl-content h2 {
+  color: white;
+}
+
+
+/* HAMPPARI MENU */
+
+.down-arrow {
+  width: 35px;
+}
+
+.nav-label {
+  display: none;
+  position: absolute;
+  left: 230px;
+  top: 10px;
+  width: 40px;
+  line-height: 4.5rem;
+  margin-left: 15px;
+  z-index: 151;
+}
+
+.language-list {
+  display: none;
+}
+
+.language-list-item {
+  list-style: none;
+  cursor: pointer;
+}
+
+#toggleCheckLanguage {
+  display: none;
+  width: 40px;
+}
+
+#toggleCheckLanguage:checked + .language-list {
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 4.5rem;
+  right: 1.25rem;
+  z-index: 200;
+  background-color: white;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 10px;
+}
+
+
+#toggleCheck {
+  display: none;
+  width: 40px;
+}
+
+.grey {
+  width: 100%;
+  height: 100vh;
+  background-color: #40454b;
+  opacity: 50%;
+  position: absolute;
+  top: 7rem;
+  display: none;
+  z-index: 150;
+}
+
+/* MEDIASÄÄNNÖT */
+
+@media screen and (max-width: 950px) {
+
+.grid-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  column-gap: 30px;
+  row-gap: 10px;
+}
+
+.nav-label {
+  display: block;
+  cursor: pointer;
+}
+
+nav {
+  height: 4.5rem;
+}
+
+main {
+  margin-top: 1rem;
+}
+
+.nav-container {
+  padding: 0 50px 15px 50px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 4.5rem;
+  flex-flow: column;
+  z-index: 200;
+  background-color: var(--background-color);
+  display: none;
+  border-radius: 20px;
+}
+
+.nav-container li {
+  padding-top: 20px;
+}
+
+#toggleCheck:checked + .nav-container {
+  display: block;
+}
+
+#toggleCheck:checked ~ .grey {
+  display: block;
+}
+
+.infoarea {
+  order: 1;
+}
+
+.luncharea {
+  order: 2;
+}
+
+.transitarea {
+  order: 4;
+}
+
+.weatherarea {
+  order: 3;
+}
+
+}
+
+@media screen and (max-width: 630px) {
+
+.card {
+  flex-flow: column;
+}
+
+.card-img-container {
+  width: 100%;
+  overflow: visible;
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+
+.card-text {
+  padding: 0 10px;
+}
+
+.card-header {
+  padding: 0 10px;
+}
+
+}
