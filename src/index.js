@@ -101,7 +101,7 @@ const showInfo = (fi) => {
   if (fi === true) {
     infoTopic.textContent = `Koronatiedote`;
   } else {
-    infoTopic.textContent = `Corona instructions`;
+    infoTopic.textContent = `Covid instructions`;
   }
 };
 
