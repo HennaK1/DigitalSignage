@@ -95,13 +95,13 @@ nav {
 /* GRID */
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 320px 320px;
-    column-gap: 30px;
-    row-gap: 10px;
-    margin: 0 20px;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 320px 320px;
+  column-gap: 30px;
+  row-gap: 10px;
+  margin: 0 20px;
+  justify-items: center;
 }
 
 /* KORTIT */
@@ -232,6 +232,20 @@ svg {
 .hsl-content h2 {
   color: white;
 }
+.bus-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 25px;
+}
+.iconpos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#hsl-data {
+  margin-top: 20px;
+}
 
 /* HAMPPARI MENU */
 
@@ -296,6 +310,12 @@ svg {
 /* MEDIASÄÄNNÖT */
 
 @media screen and (max-width: 950px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    column-gap: 30px;
+    row-gap: 10px;
+  }
 
 .grid-container {
   grid-template-columns: 1fr;

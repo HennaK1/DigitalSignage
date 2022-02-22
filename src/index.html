@@ -5,7 +5,9 @@
   <meta charset="utf-8" />
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="assets/styles.css">
-  <script src="weather.js"></script>
+  <script src="https://kit.fontawesome.com/8730c9b44a.js" crossorigin="anonymous"></script>
+  <!-- <script src="assets/weather.js"></script>
+  <script src="./index.js"></script> -->
 </head>
 
 <body>
@@ -104,15 +106,18 @@
       <!-- HSL -->
       <article class="card transitarea">
         <div class="card-content small hsl-content">
-          <div class="card-header small-header">
+          <div class="card-header small-header iconpos">
             <h2>HSL</h2>
+            <img class="bus-icon" src="./assets/img/bus-school.png" alt="bussi ikoni">
           </div>
-          <p class="card-text card-small-text">Tähän tulee hienot bussiaikataulut</p>
+          <section id="hsl-page">
+            <div id="hsl-data">
+            </div>
+          </section>
         </div>
       </article>
     </div>
   </main>
-
 </body>
 
 </html>
