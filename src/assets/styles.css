@@ -56,11 +56,10 @@ body {
 }
 
 nav {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-container {
@@ -96,13 +95,13 @@ nav {
 /* GRID */
 
 .grid-container {
-    display: grid;
-    grid-template-columns: 2fr 1fr;
-    grid-template-rows: 320px 320px;
-    column-gap: 30px;
-    row-gap: 10px;
-    margin: 0 20px;
-    justify-items: center;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 320px 320px;
+  column-gap: 30px;
+  row-gap: 10px;
+  margin: 0 20px;
+  justify-items: center;
 }
 
 /* KORTIT */
@@ -222,7 +221,20 @@ nav {
 .hsl-content h2 {
   color: white;
 }
-
+.bus-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 25px;
+}
+.iconpos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#hsl-data {
+  margin-top: 20px;
+}
 
 /* HAMPPARI MENU */
 
@@ -268,7 +280,6 @@ nav {
   border-radius: 10px;
 }
 
-
 #toggleCheck {
   display: none;
   width: 40px;
@@ -288,107 +299,102 @@ nav {
 /* MEDIASÄÄNNÖT */
 
 @media screen and (max-width: 950px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    column-gap: 30px;
+    row-gap: 10px;
+  }
 
-.grid-container {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  column-gap: 30px;
-  row-gap: 10px;
-}
+  .nav-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: boldattuteksti;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 2px;
+    color: white;
+    background-color: var(--metropolia-oranssi);
+    border-radius: 10px;
+    padding: 5px;
+    width: 200px;
+    height: 50px;
+  }
 
-.nav-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-family: boldattuteksti;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  letter-spacing: 2px;
-  color: white;
-  background-color: var(--metropolia-oranssi);
-  border-radius: 10px;
-  padding: 5px;
-  width: 200px;
-  height: 50px;
-}
+  nav {
+    height: 4.5rem;
+  }
 
-nav {
-  height: 4.5rem;
-}
+  main {
+    margin-top: 1rem;
+  }
 
-main {
-  margin-top: 1rem;
-}
+  .nav-container {
+    padding: 0 50px 15px 50px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 4.5rem;
+    flex-flow: column;
+    z-index: 200;
+    background-color: var(--background-color);
+    display: none;
+    border-radius: 20px;
+  }
 
-.nav-container {
-  padding: 0 50px 15px 50px;
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 4.5rem;
-  flex-flow: column;
-  z-index: 200;
-  background-color: var(--background-color);
-  display: none;
-  border-radius: 20px;
-}
+  .nav-container li {
+    padding-top: 20px;
+  }
 
-.nav-container li {
-  padding-top: 20px;
-}
+  #toggleCheck:checked + .nav-container {
+    display: block;
+  }
 
-#toggleCheck:checked + .nav-container {
-  display: block;
-}
+  #toggleCheck:checked ~ .grey {
+    display: block;
+  }
 
-#toggleCheck:checked ~ .grey {
-  display: block;
-}
+  .infoarea {
+    order: 1;
+  }
 
-.infoarea {
-  order: 1;
-}
+  .luncharea {
+    order: 2;
+  }
 
-.luncharea {
-  order: 2;
-}
+  .transitarea {
+    order: 4;
+  }
 
-.transitarea {
-  order: 4;
-}
-
-.weatherarea {
-  order: 3;
-}
-
+  .weatherarea {
+    order: 3;
+  }
 }
 
 @media screen and (max-width: 630px) {
+  .card {
+    flex-flow: column;
+  }
 
-.card {
-  flex-flow: column;
-}
+  .card-img-container {
+    width: 100%;
+    overflow: visible;
+  }
 
-.card-img-container {
-  width: 100%;
-  overflow: visible;
-}
+  .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center 40%;
+  }
 
-.card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  object-position: center 40%;
-}
+  .card-text {
+    padding: 0 10px;
+  }
 
-
-.card-text {
-  padding: 0 10px;
-}
-
-.card-header {
-  padding: 0 10px;
-}
-
+  .card-header {
+    padding: 0 10px;
+  }
 }
