@@ -56,11 +56,10 @@ body {
 }
 
 nav {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .nav-container {
@@ -194,7 +193,18 @@ nav {
   display: flex;
   align-items: center;
 }
-
+.temp,
+.description {
+  text-align: center;
+  text-transform: capitalize;
+}
+.temp {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+svg {
+  fill: black;
+}
 /* MENU -KORTTI */
 
 .menu-list {
@@ -222,7 +232,6 @@ nav {
 .hsl-content h2 {
   color: white;
 }
-
 
 /* HAMPPARI MENU */
 
@@ -267,7 +276,6 @@ nav {
   border: 1px solid rgb(207, 207, 207);
   border-radius: 10px;
 }
-
 
 #toggleCheck {
   display: none;

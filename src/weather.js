@@ -2,7 +2,7 @@
 let weather = {
   'apiKey': 'c042c0bcea83f22bde97ce234ae8c4f7',
   fetchWeather: function () {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Karamalmi&units=metric&appid='
+    fetch('https://api.openweathermap.org/data/2.5/weather?q=Karamalmi&units=metric&lang=fi&appid='
     + this.apiKey)
     .then((response) => response.json())
     .then((data) => this.displayWeather(data));
@@ -17,3 +17,4 @@ let weather = {
     document.querySelector('.temp').innerText = temp.toFixed(0) + '°C';
   },
 };
+weather.fetchWeather();
