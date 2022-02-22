@@ -232,17 +232,32 @@ svg {
 .hsl-content h2 {
   color: white;
 }
+.bus-icon {
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  right: 25px;
+}
+.iconpos {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+#hsl-data {
+  margin-top: 20px;
+}
 
 /* HAMPPARI MENU */
 
 .down-arrow {
-  width: 35px;
+  width: 15px;
+  margin-left: 15px;
 }
 
 .nav-label {
   display: none;
   position: absolute;
-  left: 230px;
+  left: 250px;
   top: 10px;
   width: 40px;
   line-height: 4.5rem;
@@ -302,83 +317,133 @@ svg {
     row-gap: 10px;
   }
 
-  .nav-label {
-    display: block;
-    cursor: pointer;
-  }
+.grid-container {
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  column-gap: 30px;
+  row-gap: 10px;
+}
 
-  nav {
-    height: 4.5rem;
-  }
+.nav-label {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-family: boldattuteksti;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  letter-spacing: 1.2px;
+  color: var(--metropolia-oranssi);
+  border: 1px solid var(--metropolia-oranssi);
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 50px;
+}
 
-  main {
-    margin-top: 1rem;
-  }
+nav {
+  height: 4.5rem;
+}
 
-  .nav-container {
-    padding: 0 50px 15px 50px;
-    width: 100%;
-    height: auto;
-    position: absolute;
-    top: 4.5rem;
-    flex-flow: column;
-    z-index: 200;
-    background-color: var(--background-color);
-    display: none;
-    border-radius: 20px;
-  }
+main {
+  margin-top: 1rem;
+}
 
-  .nav-container li {
-    padding-top: 20px;
-  }
+.nav-container {
+  padding: 0 50px 15px 270px;
+  width: 100%;
+  height: auto;
+  position: absolute;
+  top: 4.5rem;
+  flex-flow: column;
+  z-index: 200;
+  background-color: var(--background-color);
+  display: none;
+  border-radius: 20px;
+}
 
-  #toggleCheck:checked + .nav-container {
-    display: block;
-  }
+.nav-container li {
+  padding-top: 20px;
+}
 
-  #toggleCheck:checked ~ .grey {
-    display: block;
-  }
+#toggleCheck:checked + .nav-container {
+  display: block;
+}
 
-  .infoarea {
-    order: 1;
-  }
+#toggleCheck:checked ~ .grey {
+  display: block;
+}
 
-  .luncharea {
-    order: 2;
-  }
+.infoarea {
+  order: 1;
+}
 
-  .transitarea {
-    order: 4;
-  }
+.luncharea {
+  order: 2;
+}
 
-  .weatherarea {
-    order: 3;
-  }
+.transitarea {
+  order: 4;
+}
+
+.weatherarea {
+  order: 3;
+}
+
 }
 
 @media screen and (max-width: 630px) {
-  .card {
-    flex-flow: column;
-  }
 
-  .card-img-container {
-    width: 100%;
-    overflow: visible;
-  }
+.nav-label {
+  top: 55px;
+  left: 34px;
+  width: 160px;
+  height: 30px;
+  font-size: 1em;
+  border-radius: 8px;
+  border: none;
+  background-color: var(--background-color);
+}
 
-  .card-img {
-    width: 100%;
-    height: 200px;
-    object-fit: cover;
-    object-position: center 40%;
-  }
+.nav-container {
+  padding: 0 50px 15px 50px;
+  top: 5.5rem;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
-  .card-text {
-    padding: 0 10px;
-  }
+.down-arrow {
+  margin-left: 5px;
+}
 
-  .card-header {
-    padding: 0 10px;
-  }
+main {
+  margin-top: 2rem;
+}
+
+.card {
+  flex-flow: column;
+}
+
+.card-img-container {
+  width: 100%;
+  overflow: visible;
+}
+
+.card-img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+
+.card-text {
+  padding: 0 10px;
+}
+
+.card-header {
+  padding: 0 10px;
+}
+
 }
