@@ -1,5 +1,6 @@
 import { fetchData } from './modules/network';
 import HSLData from './modules/hsl-data';
+import FazerData from './modules/fazer-data';
 
 /**
  * Fetching HSL data
@@ -21,8 +22,6 @@ fetchData(HSLData.apiUrl, {
 /**
  * WEATHER
  */
-
-
 let weather = {
   'apiKey': 'c042c0bcea83f22bde97ce234ae8c4f7',
   fetchWeather: function () {
@@ -42,3 +41,84 @@ let weather = {
   },
 };
 weather.fetchWeather();
+
+/**
+ * LUNCH
+ */
+
+//Defining language
+let langFi = true;
+
+const menuList = document.querySelector('.menu-list');
+let lunchTopic = document.querySelector('.lunch-topic');
+
+const renderFazer = (fi) => {
+  if (fi === true) {
+    lunchTopic.textContent = `Päivän lounas`;
+    fetchData(FazerData.fazerLunchMenuFiUrl, {}, true).then(data => {
+      const menuData = JSON.parse(data.contents);
+      console.log(menuData);
+      let course = FazerData.parseFazerMenu(menuData.LunchMenus[0]);
+      showMenu(course, menuList);
+    });
+  } else {
+    lunchTopic.textContent = `Today's lunch`;
+    fetchData(FazerData.fazerLunchMenuEnUrl, {}, true).then(data => {
+      const menuData = JSON.parse(data.contents);
+      console.log(menuData);
+      let course = FazerData.parseFazerMenu(menuData.LunchMenus[0]);
+      showMenu(course, menuList);
+    });
+  }
+};
+
+renderFazer(langFi);
+
+/**
+ * Function showing the menu
+ *
+ * @param {array} courses course's names
+ * @param {array} menuList list of courses
+ */
+const showMenu = (courses, menuList) => {
+  menuList.innerHTML = ``;
+  for (let i = 0; i < courses.length; i++) {
+    menuList.innerHTML += `
+      <li>${courses[i]}</li>
+      `;
+  };
+};
+
+/**
+ * LANGUAGE
+ */
+
+const currentLangBtn = document.querySelector('.currentLang');
+const switchLangBtn = document.querySelector('.switchLang');
+const infoTopic = document.querySelector('.info-topic');
+
+const showInfo = (fi) => {
+  if (fi === true) {
+    infoTopic.textContent = `Koronatiedote`;
+  } else {
+    infoTopic.textContent = `Corona instructions`;
+  }
+};
+
+showInfo(langFi);
+
+const changeLanguage = () => {
+  if (langFi) {
+    currentLangBtn.src = "assets/img/united-kingdom.png";
+    switchLangBtn.src = "assets/img/finland.png";
+    langFi = false;
+  } else {
+    langFi = true;
+    currentLangBtn.src = "assets/img/finland.png";
+    switchLangBtn.src = "assets/img/united-kingdom.png";
+  }
+  renderFazer(langFi);
+  showInfo(langFi);
+};
+
+switchLangBtn.addEventListener('click', changeLanguage);
