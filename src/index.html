@@ -5,8 +5,7 @@
   <meta charset="utf-8" />
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="assets/styles.css">
-  <script src="https://kit.fontawesome.com/8730c9b44a.js" crossorigin="anonymous"></script>
-  <script src="assets/weather.js"></script>
+  <script src="weather.js"></script>
 </head>
 
 <body>
@@ -68,14 +67,14 @@
       <article class="card weatherarea">
         <div class="card-content weather-content">
           <div class="card-header">
-            <h2 class="city"><i class="fa-solid fa-map-pin"></i>Karamalmi</h2>
+            <h2 class="city">
+              <svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" width="0.75em" height="1em" viewBox="0 0 384 512"><path d="M168.3 499.2C116.1 435 0 279.4 0 192C0 85.96 85.96 0 192 0c106 0 192 85.96 192 192c0 87.4-117 243-168.3 307.2c-12.3 15.3-35.1 15.3-47.4 0zM192 256c35.3 0 64-28.7 64-64s-28.7-64-64-64s-64 28.7-64 64s28.7 64 64 64z"/></svg> Karamalmi</h2>
           </div>
           <div class="weather">
             <img src="" alt="" class="icon">
             <div class="temp"></div>
             <div class="description"></div>
           </div>
-          <!-- <p class="card-text">Tähän tulee hieno sää</p> -->
         </div>
       </article>
       <!-- Ruokalista -->

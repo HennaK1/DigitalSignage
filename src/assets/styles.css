@@ -193,7 +193,18 @@ nav {
   display: flex;
   align-items: center;
 }
-
+.temp,
+.description {
+  text-align: center;
+  text-transform: capitalize;
+}
+.temp {
+  font-size: 2em;
+  margin-bottom: 15px;
+}
+svg {
+  fill: black;
+}
 /* MENU -KORTTI */
 
 .menu-list {
