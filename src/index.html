@@ -5,6 +5,8 @@
   <meta charset="utf-8" />
   <title><%= htmlWebpackPlugin.options.title %></title>
   <link rel="stylesheet" href="assets/styles.css">
+  <script src="https://kit.fontawesome.com/8730c9b44a.js" crossorigin="anonymous"></script>
+  <script src="assets/weather.js"></script>
 </head>
 
 <body>
@@ -17,12 +19,12 @@
       </a>
     </div>
 
-    <label class="nav-label" for="toggleCheck"><img class="down-arrow" src="assets/img/arrow-down.png"
+    <label class="nav-label" for="toggleCheck">Karamalmi <img class="down-arrow" src="assets/img/simple-arrow-white.png"
         alt="arrow-down"></label>
     <input type="checkbox" id="toggleCheck">
 
     <ul class="nav-container">
-      <li class="nav-link"><a class="active" href="#">Karaportti</a></li>
+      <li class="nav-link"><a class="active" href="#">Karamalmi</a></li>
       <li class="nav-link"><a href="#">Myyrmäki</a></li>
       <li class="nav-link"><a href="#">Myllypuro</a></li>
       <li class="nav-link"><a href="#">Arabia</a></li>
@@ -51,7 +53,7 @@
         <div class="card-content">
           <div class="card-header">
             <h2>Koronatiedote</h2>
-            <h3 class="campus">Karaportti</h3>
+            <h3 class="campus">Karamalmi</h3>
           </div>
           <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae, nostrum consectetur.
             Voluptatum laborum
@@ -64,11 +66,16 @@
       </article>
       <!-- Sää -->
       <article class="card weatherarea">
-        <div class="card-content small weather-content">
-          <div class="card-header small-header">
-            <h2>Sää</h2>
+        <div class="card-content weather-content">
+          <div class="card-header">
+            <h2 class="city"><i class="fa-solid fa-map-pin"></i>Karamalmi</h2>
           </div>
-          <p class="card-text card-small-text">Tähän tulee hieno sää</p>
+          <div class="weather">
+            <img src="" alt="" class="icon">
+            <div class="temp"></div>
+            <div class="description"></div>
+          </div>
+          <!-- <p class="card-text">Tähän tulee hieno sää</p> -->
         </div>
       </article>
       <!-- Ruokalista -->
@@ -79,7 +86,7 @@
         <div class="card-content">
           <div class="card-header">
             <h2>Ruokalista</h2>
-            <h3 class="campus">Karaportti</h3>
+            <h3 class="campus">Karamalmi</h3>
           </div>
           <ul class="menu-list">
             <li>Maiores illum deleniti officiis facilis</li>
