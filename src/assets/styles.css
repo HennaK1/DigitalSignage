@@ -227,13 +227,14 @@ nav {
 /* HAMPPARI MENU */
 
 .down-arrow {
-  width: 35px;
+  width: 15px;
+  margin-left: 15px;
 }
 
 .nav-label {
   display: none;
   position: absolute;
-  left: 230px;
+  left: 250px;
   top: 10px;
   width: 40px;
   line-height: 4.5rem;
@@ -296,8 +297,20 @@ nav {
 }
 
 .nav-label {
-  display: block;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   cursor: pointer;
+  font-family: boldattuteksti;
+  text-transform: uppercase;
+  font-size: 1.2em;
+  letter-spacing: 2px;
+  color: white;
+  background-color: var(--metropolia-oranssi);
+  border-radius: 10px;
+  padding: 5px;
+  width: 200px;
+  height: 50px;
 }
 
 nav {
