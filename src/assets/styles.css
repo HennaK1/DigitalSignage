@@ -205,6 +205,14 @@ nav {
 svg {
   fill: black;
 }
+.date-container {
+  display: flex;
+  border: 1px solid black;
+}
+.date,
+.time {
+  margin-right: 10px;
+}
 .future-forecast {
   display: flex;
 }
