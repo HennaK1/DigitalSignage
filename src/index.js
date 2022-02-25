@@ -24,11 +24,11 @@ fetchData(HSLData.apiUrl, {
 
 const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
-const weatherForecast = document.getElementById('weather-today');
+const weatherForecastEl = document.getElementById('weather-today');
 const futureForecast = document.getElementById('forecast');
 
-const daysFI = ['Maanantai', 'Tiistai', 'Keskiviikko', 'Torstai', 'Perjantai', 'Lauantai', 'Sunnuntai'];
-// const daysEN = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
+// const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
@@ -69,50 +69,28 @@ getWeatherData();
 
 const showWeatherData = (data) => {
   let nextDayForecast = '';
+  let weatherForecast = '';
+    data.daily.forEach((day, idx) => {
+        if(idx == 0) {
+          weatherForecast += `
+          <div class="weather-today" id="weather-today">
+            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
+            <div class="temp">${day.temp.day.toFixed(0)}</div>
+            <div class="description">${day.weather[0].main}</div>
+          </div>
+          `;
+          console.log('tänään', day.weather[0]);
 
-  data.daily.forEach((day, id) => {
-
-    if(id === 0) {
-      weatherForecast.innerHTML = `
-      <div class="weather-today" id="weather-today">
-        <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
-        <div class="temp">${day.temp.day}</div>
-        <div class="description"></div>
-      </div>
-      `;
-
-    } else {
-      nextDayForecast += `
-      <div class="future-forecast-item">
-        <div class="day"></div>
-        <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-        <div class="temp">${day.temp.day}</div>
-      </div>
-      `;
-    }
-  });
-
+        } else if(idx <= 3){
+          nextDayForecast += `
+          <div class="future-forecast-item">
+            <div class="day"></div>
+            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+            <div class="temp">${day.temp.day.toFixed(0)}</div>
+          </div>
+          `;
+        }
+});
   futureForecast.innerHTML = nextDayForecast;
-
+  weatherForecastEl.innerHTML = weatherForecast;
 };
-
-
-
-// let otherDayForecast = '';
-// data.current.forEach ((day, idx) => {
-//   if(idx == 0) {
-//     weatherNow.innerHTML = `
-//     <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
-//             <div class="temp">${day.current.temp}&#176;C</div>
-//             <div class="description">${day.weather[0].description}</div>
-//     `;
-//   } else {
-//     otherDayForecast += `
-//     <div class="day">${window.moment(day.dt*1000).format('ddd')}</div>
-//               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-//               <div class="temp">${day.current.temp}&#176 C</div>
-//     `;
-//   };
-// });
-// }
-// weatherFuture.innerHTML = otherDayForecast;
