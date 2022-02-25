@@ -25,27 +25,38 @@ fetchData(HSLData.apiUrl, {
 
 const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
+const weekdayEl = document.getElementById('weekday');
 const weatherForecastEl = document.getElementById('weather-today');
 const futureForecast = document.getElementById('forecast');
+
 
 const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
 // const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
+const showMinutes = (value) => {
+  if (value < 10) {
+    return '0' + value;
+  } else {
+    return value;
+  }
+};
 
 //  Time and date
 setInterval(() => {
   const time = new Date();
   const date = time.getDate();
-  const month = time.getMonth()+1;
+  const month = time.getMonth() + 1;
   const year = time.getFullYear();
   const day = time.getDay();
   const hours = time.getHours();
   const minutes = time.getMinutes();
+  const weekday = time.toLocaleString("Fi", { weekday: "long" });
 
-  timeEl.innerHTML = hours + ':' + minutes;
+  timeEl.innerHTML = hours + ':' + showMinutes(minutes);
   dateEl.innerHTML = date + '.' + month + '.' + year;
+  weekdayEl.innerHTML = weekday;
 
 }, 1000);
 
@@ -56,44 +67,41 @@ setInterval(() => {
 const getWeatherData = () => {
   navigator.geolocation.getCurrentPosition((success) => {
 
-    let {latitude, longitude } = success.coords;
+    let { latitude, longitude } = success.coords;
 
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
+      .then(res => res.json()).then(data => {
 
-    console.log('weather-data', data);
-    showWeatherData(data);
-    });
+        console.log('weather-data', data);
+        showWeatherData(data);
+      });
   });
 };
 getWeatherData();
 
 const showWeatherData = (data) => {
-  let nextDayForecast = '';
-  let weatherForecast = '';
-    data.daily.forEach((day, idx) => {
-        if(idx == 0) {
-          weatherForecast += `
+  data.daily.forEach((day, idx) => {
+    if (idx === 0) {
+      weatherForecastEl.innerHTML += `
           <div class="weather-today" id="weather-today">
             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
             <div class="temp">${day.temp.day.toFixed(0)}</div>
             <div class="description">${day.weather[0].main}</div>
           </div>
           `;
-          console.log('tänään', day.weather[0]);
-
-        } else if(idx <= 3){
-          nextDayForecast += `
+      console.log('tänään', day.weather[0]);
+      console.log('indeksi tänään', idx);
+    } else if (idx > 0 && idx < 4) {
+      futureForecast.innerHTML += `
           <div class="future-forecast-item">
             <div class="day"></div>
             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
             <div class="temp">${day.temp.day.toFixed(0)}</div>
           </div>
           `;
-        }
-});
-  futureForecast.innerHTML = nextDayForecast;
-  weatherForecastEl.innerHTML = weatherForecast;
+      console.log('indeksi next', idx);
+    }
+  });
 };
 
 /**
