@@ -328,6 +328,33 @@ svg {
 #hsl-data {
   margin-top: 20px;
 }
+#hsl-page {
+  width: 100%;
+}
+.timetable {
+  list-style-type: none;
+  padding: 10px;
+}
+.bus-times {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  margin: 10px;
+  align-items: center;
+}
+#bus-nmbr {
+  padding: 5px;
+  border: 1px solid white;
+  border-radius: 5px;
+}
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  padding: 0;
+}
 
 /* HAMPPARI MENU */
 

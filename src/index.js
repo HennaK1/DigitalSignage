@@ -10,15 +10,27 @@ import announcementData from './modules/announcements-data';
 fetchData(HSLData.apiUrl, {
   method: 'POST',
   headers: { 'Content-Type': 'application/graphql' },
-  body: HSLData.getQueryForNextRidesByStopId(2132226)
+  body: HSLData.getQueryForNextRidesByStopId(2132207)
 }).then(response => {
-  // TODO: create separate render HSL data functions (in HSLData module maybe?)
-  console.log('hsl data', response.data.stop.stoptimesWithoutPatterns[0]);
+  console.log(response.data);
   const stop = response.data.stop;
+  const stopPattern = response.data.stop.stoptimesWithoutPatterns;
 
-  document.querySelector('#hsl-data').innerHTML = `<p>
-    ${stop.name}<br> ${stop.stoptimesWithoutPatterns[0].trip.routeShortName} ${stop.stoptimesWithoutPatterns[0].headsign}
-  </p>`;
+  const hslContent = document.querySelector('.timetable');
+
+  // hslContent.innerHTML += `<p>${stop.name}<br></p>`;
+
+  for (let i = 0; i < 4; i++) {
+    let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+    let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+    hslContent.innerHTML += `
+    <li class="bus-times">
+    <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+    <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+    <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+  </li>
+  <hr>`;
+  };
 });
 
 /**
