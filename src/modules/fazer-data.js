@@ -1,5 +1,9 @@
-const fazerLunchMenuFiUrl = 'https://www.foodandco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=2022-02-01';
-const fazerLunchMenuEnUrl = 'https://www.foodandco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=2022-02-01';
+import { todayISODate } from "./tools";
+
+const fazerLunchMenuFiUrl = `https://www.foodandco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=270540&weekDate=${todayISODate}`;
+const fazerLunchMenuEnUrl = `https://www.foodandco.fi/api/restaurant/menu/week?language=en&restaurantPageId=270540&weekDate=${todayISODate}`;
+
+
 
 
 /**

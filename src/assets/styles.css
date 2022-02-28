@@ -291,6 +291,7 @@ svg {
 .menu-list {
   list-style: circle;
   padding-left: 40px;
+  overflow: auto;
 }
 
 .menu-list li {
