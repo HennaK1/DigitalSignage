@@ -1,5 +1,5 @@
 import { fetchData } from './modules/network';
-import HSLData from './modules/hsl-data';
+import HSLData from './modules/hsl/hsl-data';
 import FazerData from './modules/fazer-data';
 
 /**
@@ -13,9 +13,10 @@ fetchData(HSLData.apiUrl, {
   // TODO: create separate render HSL data functions (in HSLData module maybe?)
   console.log('hsl data', response.data.stop.stoptimesWithoutPatterns[0]);
   const stop = response.data.stop;
-
+  let date = new Date(parseInt(stop.stoptimesWithoutPatterns[0].realtimeArrival + stop.stoptimesWithoutPatterns[0].serviceDay) * 1000);
+  let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
   document.querySelector('#hsl-data').innerHTML = `<p>
-    ${stop.name}<br> ${stop.stoptimesWithoutPatterns[0].trip.routeShortName} ${stop.stoptimesWithoutPatterns[0].headsign}
+    ${stop.name}<br> ${stop.stoptimesWithoutPatterns[0].trip.routeShortName} ${stop.stoptimesWithoutPatterns[0].headsign} ${localeSpecificTime.replace('PM', '')}
   </p>`;
 });
 
