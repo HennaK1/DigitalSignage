@@ -9,11 +9,11 @@ import announcementData from './modules/announcements-data';
 fetchData(HSLData.apiUrl, {
   method: 'POST',
   headers: { 'Content-Type': 'application/graphql' },
-  body: HSLData.getQueryForNextRidesByStopId(2132207)
+  body: HSLData.getQueryForNextRidesByStopId(2132226)
 }).then(response => {
-  console.log(response.data);
+  // TODO: create separate render HSL data functions (in HSLData module maybe?)
+  console.log('hsl data', response.data.stop.stoptimesWithoutPatterns[0]);
   const stop = response.data.stop;
-<<<<<<< HEAD
   let date = new Date(parseInt(stop.stoptimesWithoutPatterns[0].realtimeArrival + stop.stoptimesWithoutPatterns[0].serviceDay) * 1000);
   let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
   document.querySelector('#bus-nmbr').innerHTML = `
@@ -32,6 +32,10 @@ fetchData(HSLData.apiUrl, {
   const stop = response.data.stop;
   const stopPattern = response.data.stop.stoptimesWithoutPatterns;
 
+  const hslContent = document.querySelector('.timetable');
+
+  hslContent.innerHTML += `${stop.name}`;
+
   for (let i = 0; i < 4; i++) {
     let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
     let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
@@ -39,24 +43,6 @@ fetchData(HSLData.apiUrl, {
     document.querySelector('#bus-destination').innerHTML = `${stop.stoptimesWithoutPatterns[i].headsign}`;
     document.querySelector('#bus-arriving').innerHTML = `${localeSpecificTime.replace('PM', '')}
   `;
-=======
-  const stopPattern = response.data.stop.stoptimesWithoutPatterns;
-
-  const hslContent = document.querySelector('.timetable');
-
-  // hslContent.innerHTML += `<p>${stop.name}<br></p>`;
-
-  for (let i = 0; i < 4; i++) {
-    let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-    let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-    hslContent.innerHTML += `
-    <li class="bus-times">
-    <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-    <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-    <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-  </li>
-  <hr>`;
->>>>>>> 4f64cacceb299f26bf7c052513ee6595e17864de
   };
 });
 
