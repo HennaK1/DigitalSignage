@@ -16,9 +16,11 @@ fetchData(HSLData.apiUrl, {
   const stop = response.data.stop;
   let date = new Date(parseInt(stop.stoptimesWithoutPatterns[0].realtimeArrival + stop.stoptimesWithoutPatterns[0].serviceDay) * 1000);
   let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-  document.querySelector('#hsl-data').innerHTML = `<p>
-    ${stop.name}<br> ${stop.stoptimesWithoutPatterns[0].trip.routeShortName} ${stop.stoptimesWithoutPatterns[0].headsign} ${localeSpecificTime.replace('PM', '')}
-  </p>`;
+  document.querySelector('#bus-nmbr').innerHTML = `
+    ${stop.stoptimesWithoutPatterns[0].trip.routeShortName}`;
+    document.querySelector('#bus-destination').innerHTML = `${stop.stoptimesWithoutPatterns[0].headsign}`;
+    document.querySelector('#bus-arriving').innerHTML = ` ${localeSpecificTime.replace('PM', '')}
+  `;
 });
 
 /**
