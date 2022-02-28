@@ -5,7 +5,7 @@ import announcementData from './modules/announcements-data';
 
 /**
  * Fetching HSL data
- */
+ *
 fetchData(HSLData.apiUrl, {
   method: 'POST',
   headers: { 'Content-Type': 'application/graphql' },
@@ -21,6 +21,25 @@ fetchData(HSLData.apiUrl, {
     document.querySelector('#bus-destination').innerHTML = `${stop.stoptimesWithoutPatterns[0].headsign}`;
     document.querySelector('#bus-arriving').innerHTML = ` ${localeSpecificTime.replace('PM', '')}
   `;
+});*/
+
+fetchData(HSLData.apiUrl, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/graphql' },
+  body: HSLData.getQueryForNextRidesByStopId(2132207)
+}).then(response => {
+  console.log(response.data);
+  const stop = response.data.stop;
+  const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+
+  for (let i = 0; i < 4; i++) {
+    let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+    let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+    document.querySelector('#bus-nmbr').innerHTML = `${stop.stoptimesWithoutPatterns[i].trip.routeShortName}`;
+    document.querySelector('#bus-destination').innerHTML = `${stop.stoptimesWithoutPatterns[i].headsign}`;
+    document.querySelector('#bus-arriving').innerHTML = `${localeSpecificTime.replace('PM', '')}
+  `;
+  };
 });
 
 /**
