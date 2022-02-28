@@ -37,6 +37,12 @@ const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
+
+/**
+ * Function to add missing zero
+ * @param {number} value current time without zero
+ * @returns time with zero i.e. 15:05.
+ */
 const showMinutes = (value) => {
   if (value < 10) {
     return '0' + value;
@@ -45,7 +51,9 @@ const showMinutes = (value) => {
   }
 };
 
-//  Time and date
+/**
+ * Function to get date and time
+ */
 setInterval(() => {
   const time = new Date();
   const date = time.getDate();
@@ -80,9 +88,14 @@ const getWeatherData = () => {
 };
 getWeatherData();
 
+
+/**
+ * Function to get data from api
+ * @param {array} data data from openweathermap- api
+ */
 const showWeatherData = (data) => {
-  const time = new Date();
-  const next = time.toLocaleString("Fi", { weekday: "long" });
+  // const time = new Date();
+  // const next = time.toLocaleString("Fi", { weekday: "long" });
   data.daily.forEach((day, idx) => {
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
