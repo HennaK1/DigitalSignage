@@ -53,7 +53,7 @@ setInterval(() => {
   const year = time.getFullYear();
   const hours = time.getHours();
   const minutes = time.getMinutes();
-  const weekday = time.toLocaleString("Fi", { weekday: "long" });
+  let weekday = time.toLocaleString("Fi", { weekday: "long" });
 
   timeEl.innerHTML = hours + ':' + showMinutes(minutes);
   dateEl.innerHTML = date + '.' + month + '.' + year;
