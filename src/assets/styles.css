@@ -188,6 +188,14 @@ nav {
   padding-left: 20px;
 }
 
+/* INFO -KORTTI */
+
+.info-text {
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
 /* SÄÄ -KORTTI */
 
 .weather-content {
@@ -370,15 +378,46 @@ svg {
   z-index: 150;
 }
 
+/* SCROLLBAR */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white rgb(211, 211, 211);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(211, 211, 211);
+  border-radius: 10px;
+}
+
 /* MEDIASÄÄNNÖT */
 
 @media screen and (max-width: 1100px) {
+
   .date-container {
     display: none;
   }
+
+
+  .info-text {
+  margin-right: 0;
+  padding-right: 10px;
+}
+
+
 }
 
 @media screen and (max-width: 980px) {
+
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto;

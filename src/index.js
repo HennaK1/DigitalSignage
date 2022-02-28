@@ -1,6 +1,8 @@
 import { fetchData } from './modules/network';
 import HSLData from './modules/hsl-data';
 import FazerData from './modules/fazer-data';
+import announcementData from './modules/announcements-data';
+
 
 /**
  * Fetching HSL data
@@ -152,22 +154,34 @@ const showMenu = (courses, menuList) => {
 };
 
 /**
+ * ANNOUNCEMENTS
+ */
+
+const infoText = document.querySelector('.info-text');
+const infoTopic = document.querySelector('.info-topic');
+const infoDate = document.querySelector('.info-date');
+
+const showInfo = (fi) => {
+  if (fi === true) {
+    infoTopic.textContent = announcementData.announcementsFi.Announcements[0].Name;
+    infoText.textContent = announcementData.announcementsFi.Announcements[0].Information;
+    infoDate.textContent = announcementData.announcementsFi.Announcements[0].Date;
+  } else {
+    infoTopic.textContent = announcementData.announcementsEn.Announcements[0].Name;
+    infoText.textContent = announcementData.announcementsEn.Announcements[0].Information;
+    infoDate.textContent = announcementData.announcementsEn.Announcements[0].Date;
+  }
+
+};
+
+showInfo(langFi);
+
+/**
  * LANGUAGE
  */
 
 const currentLangBtn = document.querySelector('.currentLang');
 const switchLangBtn = document.querySelector('.switchLang');
-const infoTopic = document.querySelector('.info-topic');
-
-const showInfo = (fi) => {
-  if (fi === true) {
-    infoTopic.textContent = `Koronatiedote`;
-  } else {
-    infoTopic.textContent = `Covid instructions`;
-  }
-};
-
-showInfo(langFi);
 
 const changeLanguage = () => {
   if (langFi) {
