@@ -1,6 +1,8 @@
 import { fetchData } from './modules/network';
 import HSLData from './modules/hsl/hsl-data';
 import FazerData from './modules/fazer-data';
+import announcementData from './modules/announcements-data';
+
 
 /**
  * Fetching HSL data
@@ -23,25 +25,90 @@ fetchData(HSLData.apiUrl, {
 /**
  * WEATHER
  */
-let weather = {
-  'apiKey': 'c042c0bcea83f22bde97ce234ae8c4f7',
-  fetchWeather: function () {
-    fetch('https://api.openweathermap.org/data/2.5/weather?q=Karamalmi&units=metric&lang=fi&appid='
-      + this.apiKey)
-      .then((response) => response.json())
-      .then((data) => this.displayWeather(data));
-  },
-  displayWeather: function (data) {
-    const { name } = data;
-    const { icon, description } = data.weather[0];
-    const { temp } = data.main;
-    console.log(name, icon, description, temp);
-    document.querySelector('.icon').src = 'https://openweathermap.org/img/wn/' + icon + '@2x.png';
-    document.querySelector('.description').innerText = description;
-    document.querySelector('.temp').innerText = temp.toFixed(0) + '°C';
-  },
+
+const timeEl = document.getElementById('time');
+const dateEl = document.getElementById('date');
+const weekdayEl = document.getElementById('weekday');
+const weatherForecastEl = document.getElementById('weather-today');
+const futureForecast = document.getElementById('next-week');
+
+
+const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
+// const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+
+const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
+
+const showMinutes = (value) => {
+  if (value < 10) {
+    return '0' + value;
+  } else {
+    return value;
+  }
 };
-weather.fetchWeather();
+
+//  Time and date
+setInterval(() => {
+  const time = new Date();
+  const date = time.getDate();
+  const month = time.getMonth() + 1;
+  const year = time.getFullYear();
+  const hours = time.getHours();
+  const minutes = time.getMinutes();
+  let weekday = time.toLocaleString("Fi", { weekday: "long" });
+
+  timeEl.innerHTML = hours + ':' + showMinutes(minutes);
+  dateEl.innerHTML = date + '.' + month + '.' + year;
+  weekdayEl.innerHTML = weekday;
+
+}, 1000);
+
+
+/**
+ * Weather based of location
+ */
+const getWeatherData = () => {
+  navigator.geolocation.getCurrentPosition((success) => {
+
+    let { latitude, longitude } = success.coords;
+
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+      .then(res => res.json()).then(data => {
+
+        console.log('weather-data', data);
+        showWeatherData(data);
+      });
+  });
+};
+getWeatherData();
+
+const showWeatherData = (data) => {
+  const time = new Date();
+  const next = time.getDay();
+  data.daily.forEach((day, idx) => {
+    if (idx === 0) {
+      weatherForecastEl.innerHTML += `
+          <div class="weather-today" id="weather-today">
+            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
+            <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+            <div class="description">${day.weather[0].description}</div>
+          </div>
+          `;
+      console.log('tänään', day.weather[0]);
+      console.log('indeksi tänään', idx);
+    } else if (idx > 0 && idx < 4) {
+      futureForecast.innerHTML += `
+          <div class="next-week">
+          <div class="days"></div>
+            <div class="day">
+              <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+              <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+            </div>
+          </div>
+          `;
+      console.log('indeksi next', idx);
+    }
+  });
+};
 
 /**
  * LUNCH
@@ -91,22 +158,34 @@ const showMenu = (courses, menuList) => {
 };
 
 /**
+ * ANNOUNCEMENTS
+ */
+
+const infoText = document.querySelector('.info-text');
+const infoTopic = document.querySelector('.info-topic');
+const infoDate = document.querySelector('.info-date');
+
+const showInfo = (fi) => {
+  if (fi === true) {
+    infoTopic.textContent = announcementData.announcementsFi.Announcements[0].Name;
+    infoText.textContent = announcementData.announcementsFi.Announcements[0].Information;
+    infoDate.textContent = announcementData.announcementsFi.Announcements[0].Date;
+  } else {
+    infoTopic.textContent = announcementData.announcementsEn.Announcements[0].Name;
+    infoText.textContent = announcementData.announcementsEn.Announcements[0].Information;
+    infoDate.textContent = announcementData.announcementsEn.Announcements[0].Date;
+  }
+
+};
+
+showInfo(langFi);
+
+/**
  * LANGUAGE
  */
 
 const currentLangBtn = document.querySelector('.currentLang');
 const switchLangBtn = document.querySelector('.switchLang');
-const infoTopic = document.querySelector('.info-topic');
-
-const showInfo = (fi) => {
-  if (fi === true) {
-    infoTopic.textContent = `Koronatiedote`;
-  } else {
-    infoTopic.textContent = `Covid instructions`;
-  }
-};
-
-showInfo(langFi);
 
 const changeLanguage = () => {
   if (langFi) {

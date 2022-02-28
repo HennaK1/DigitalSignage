@@ -126,7 +126,6 @@ nav {
   padding-left: 20px;
 }
 
-
 .card-header h2 {
   text-transform: uppercase;
   font-family: boldattuteksti;
@@ -188,6 +187,14 @@ nav {
   padding-left: 20px;
 }
 
+/* INFO -KORTTI */
+
+.info-text {
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
 /* SÄÄ -KORTTI */
 
 .weather-content {
@@ -195,22 +202,96 @@ nav {
   align-items: center;
 }
 .temp,
-.description {
+.description::first-letter {
+  margin-bottom: 10px;
   text-align: center;
   text-transform: capitalize;
 }
-.temp {
-  font-size: 2em;
-  margin-bottom: 15px;
+.description {
+  margin-bottom: 20px;
 }
 svg {
   fill: black;
 }
+
+.day {
+  text-align: center;
+}
+
+.weather-today,
+.next-week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.next-week {
+  flex-flow: column;
+  flex-direction: row;
+}
+.icon-future {
+  margin: 5px 0 5px 0;
+  width: 50%;
+}
+.icon-now {
+  margin: 5px 0 5px 0;
+  width: 75%;
+}
+
+.future-forecast-item {
+  width: 90px;
+  height: 90px;
+  border: 1px solid black;
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+/* AIKA JA PÄIVÄ */
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.date-day-container {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weekday {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-family: boldattuteksti;
+  color: var(--metropolia-oranssi);
+}
+
+.date {
+  color: var(--metropolia-harmaa);
+  font-family: boldattuteksti;
+}
+
+.time {
+  font-size: 1.5em;
+  font-family: boldattuteksti;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  color: var(--metropolia-oranssi);
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
 /* MENU -KORTTI */
 
 .menu-list {
   list-style: circle;
   padding-left: 40px;
+  overflow: auto;
 }
 
 .menu-list li {
@@ -308,9 +389,46 @@ svg {
   z-index: 150;
 }
 
+/* SCROLLBAR */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white rgb(211, 211, 211);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(211, 211, 211);
+  border-radius: 10px;
+}
+
 /* MEDIASÄÄNNÖT */
 
-@media screen and (max-width: 950px) {
+@media screen and (max-width: 1100px) {
+
+  .date-container {
+    display: none;
+  }
+
+
+  .info-text {
+  margin-right: 0;
+  padding-right: 10px;
+}
+
+
+}
+
+@media screen and (max-width: 980px) {
+
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
@@ -318,133 +436,122 @@ svg {
     row-gap: 10px;
   }
 
-.grid-container {
-  grid-template-columns: 1fr;
-  grid-template-rows: auto;
-  column-gap: 30px;
-  row-gap: 10px;
-}
+  .nav-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: boldattuteksti;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 1.2px;
+    color: var(--metropolia-oranssi);
+    border: 1px solid var(--metropolia-oranssi);
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 200px;
+    height: 50px;
+  }
 
-.nav-label {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  font-family: boldattuteksti;
-  text-transform: uppercase;
-  font-size: 1.2em;
-  letter-spacing: 1.2px;
-  color: var(--metropolia-oranssi);
-  border: 1px solid var(--metropolia-oranssi);
-  background-color: white;
-  border-radius: 10px;
-  padding: 5px;
-  width: 200px;
-  height: 50px;
-}
+  nav {
+    height: 4.5rem;
+  }
 
-nav {
-  height: 4.5rem;
-}
+  main {
+    margin-top: 1rem;
+  }
 
-main {
-  margin-top: 1rem;
-}
+  .nav-container {
+    padding: 0 50px 15px 270px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 4.5rem;
+    flex-flow: column;
+    z-index: 200;
+    background-color: var(--background-color);
+    display: none;
+    border-radius: 20px;
+  }
 
-.nav-container {
-  padding: 0 50px 15px 270px;
-  width: 100%;
-  height: auto;
-  position: absolute;
-  top: 4.5rem;
-  flex-flow: column;
-  z-index: 200;
-  background-color: var(--background-color);
-  display: none;
-  border-radius: 20px;
-}
+  .nav-container li {
+    padding-top: 20px;
+  }
 
-.nav-container li {
-  padding-top: 20px;
-}
+  #toggleCheck:checked + .nav-container {
+    display: block;
+  }
 
-#toggleCheck:checked + .nav-container {
-  display: block;
-}
+  #toggleCheck:checked ~ .grey {
+    display: block;
+  }
 
-#toggleCheck:checked ~ .grey {
-  display: block;
-}
+  .infoarea {
+    order: 1;
+  }
 
-.infoarea {
-  order: 1;
-}
+  .luncharea {
+    order: 2;
+  }
 
-.luncharea {
-  order: 2;
-}
+  .transitarea {
+    order: 4;
+  }
 
-.transitarea {
-  order: 4;
-}
-
-.weatherarea {
-  order: 3;
-}
-
+  .weatherarea {
+    order: 3;
+  }
 }
 
 @media screen and (max-width: 630px) {
+  .nav-label {
+    top: 55px;
+    left: 34px;
+    width: 160px;
+    height: 30px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--background-color);
+  }
 
-.nav-label {
-  top: 55px;
-  left: 34px;
-  width: 160px;
-  height: 30px;
-  font-size: 1em;
-  border-radius: 8px;
-  border: none;
-  background-color: var(--background-color);
-}
+  .nav-container {
+    padding: 0 50px 15px 50px;
+    top: 5.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
 
-.nav-container {
-  padding: 0 50px 15px 50px;
-  top: 5.5rem;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
+  .down-arrow {
+    margin-left: 5px;
+  }
 
-.down-arrow {
-  margin-left: 5px;
-}
+  main {
+    margin-top: 2rem;
+  }
 
-main {
-  margin-top: 2rem;
-}
+  .card {
+    flex-flow: column;
+  }
 
-.card {
-  flex-flow: column;
-}
+  .card-img-container {
+    width: 100%;
+    overflow: visible;
+  }
 
-.card-img-container {
-  width: 100%;
-  overflow: visible;
-}
+  .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center 40%;
+  }
 
-.card-img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  object-position: center 40%;
-}
+  .card-text {
+    padding: 0 10px;
+  }
 
-
-.card-text {
-  padding: 0 10px;
-}
-
-.card-header {
-  padding: 0 10px;
-}
-
+  .card-header {
+    padding: 0 10px;
+  }
 }
