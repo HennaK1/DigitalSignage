@@ -27,7 +27,7 @@ const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
 const weekdayEl = document.getElementById('weekday');
 const weatherForecastEl = document.getElementById('weather-today');
-const futureForecast = document.getElementById('forecast');
+const futureForecast = document.getElementById('next-week');
 
 
 const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
@@ -49,7 +49,6 @@ setInterval(() => {
   const date = time.getDate();
   const month = time.getMonth() + 1;
   const year = time.getFullYear();
-  const day = time.getDay();
   const hours = time.getHours();
   const minutes = time.getMinutes();
   const weekday = time.toLocaleString("Fi", { weekday: "long" });
@@ -69,7 +68,7 @@ const getWeatherData = () => {
 
     let { latitude, longitude } = success.coords;
 
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
       .then(res => res.json()).then(data => {
 
         console.log('weather-data', data);
@@ -80,23 +79,27 @@ const getWeatherData = () => {
 getWeatherData();
 
 const showWeatherData = (data) => {
+  const time = new Date();
+  const next = time.getDay();
   data.daily.forEach((day, idx) => {
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
           <div class="weather-today" id="weather-today">
             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
-            <div class="temp">${day.temp.day.toFixed(0)}</div>
-            <div class="description">${day.weather[0].main}</div>
+            <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+            <div class="description">${day.weather[0].description}</div>
           </div>
           `;
       console.log('tänään', day.weather[0]);
       console.log('indeksi tänään', idx);
     } else if (idx > 0 && idx < 4) {
       futureForecast.innerHTML += `
-          <div class="future-forecast-item">
-            <div class="day"></div>
-            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-            <div class="temp">${day.temp.day.toFixed(0)}</div>
+          <div class="next-week">
+          <div class="days"></div>
+            <div class="day">
+              <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+              <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+            </div>
           </div>
           `;
       console.log('indeksi next', idx);
