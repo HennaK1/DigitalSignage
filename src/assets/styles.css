@@ -126,7 +126,6 @@ nav {
   padding-left: 20px;
 }
 
-
 .card-header h2 {
   text-transform: uppercase;
   font-family: boldattuteksti;
@@ -209,11 +208,45 @@ nav {
   text-transform: capitalize;
 }
 .description {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 svg {
   fill: black;
 }
+
+.day {
+  text-align: center;
+}
+
+.weather-today,
+.next-week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.next-week {
+  flex-flow: column;
+  flex-direction: row;
+}
+.icon-future {
+  margin: 5px 0 5px 0;
+  width: 50%;
+}
+.icon-now {
+  margin: 5px 0 5px 0;
+  width: 75%;
+}
+
+.future-forecast-item {
+  width: 90px;
+  height: 90px;
+  border: 1px solid black;
+  margin-right: 10px;
+  font-size: 0.9em;
+}
+
+/* AIKA JA PÄIVÄ */
 
 .date-container {
   display: flex;
@@ -222,7 +255,7 @@ svg {
   border: none;
 }
 
-.date-day-container{
+.date-day-container {
   margin: 0 10px;
   display: flex;
   flex-direction: column;
@@ -245,37 +278,14 @@ svg {
 .time {
   font-size: 1.5em;
   font-family: boldattuteksti;
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   color: var(--metropolia-oranssi);
   background-color: white;
   border-radius: 10px;
   padding: 5px 10px;
 }
 
-.future-forecast {
-  display: flex;
-}
-
-.day {
-  text-align: center;
-  font-weight: bold;
-}
-
-.weather img {
-  width: 75%;
-}
-
-.future-forecast-item {
-  width: 90px;
-  height: 90px;
-  border: 1px solid black;
-  margin-right: 10px;
-  font-size: 0.9em;
-}
-.future-forecast-item img {
-  margin: 5px 0 5px 0;
-  width: 50%;
-}
 /* MENU -KORTTI */
 
 .menu-list {
