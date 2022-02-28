@@ -3,6 +3,7 @@ import HSLData from './modules/hsl/hsl-data';
 import FazerData from './modules/fazer-data';
 import announcementData from './modules/announcements-data';
 
+getHsl();
 
 /**
  * Fetching HSL data
