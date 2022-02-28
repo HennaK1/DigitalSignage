@@ -309,7 +309,6 @@ svg {
   display: flex;
   align-items: center;
   color: white;
-  height: fit-content;
 }
 
 .hsl-content h2 {
@@ -320,7 +319,6 @@ svg {
   height: 40px;
   position: absolute;
   right: 25px;
-  top: 421px;
 }
 .iconpos {
   display: flex;
@@ -343,7 +341,7 @@ svg {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  margin: 8px;
+  margin: 6px;
   align-items: center;
 }
 #bus-nmbr {
