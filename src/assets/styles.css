@@ -336,6 +336,10 @@ svg {
   padding: 10px;
 }
 .bus-times {
+<<<<<<< HEAD
+=======
+  list-style: none;
+>>>>>>> 4f64cacceb299f26bf7c052513ee6595e17864de
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
