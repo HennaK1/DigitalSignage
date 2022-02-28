@@ -195,12 +195,13 @@ nav {
 }
 .temp,
 .description::first-letter {
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   text-align: center;
   text-transform: capitalize;
 }
 .description {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1em;
 }
 svg {
   fill: black;
@@ -208,6 +209,7 @@ svg {
 
 .day {
   text-align: center;
+  font-size: 0.7em;
 }
 
 .weather-today,
@@ -222,21 +224,21 @@ svg {
   flex-direction: row;
 }
 .icon-future {
-  margin: 5px 0 5px 0;
+  /* margin: 5px 0 5px 0; */
   width: 50%;
 }
 .icon-now {
-  margin: 5px 0 5px 0;
-  width: 75%;
+  /* margin: 5px 0 5px 0; */
+  width: 70%;
 }
 
-.future-forecast-item {
+/* .future-forecast-item {
   width: 90px;
   height: 90px;
   border: 1px solid black;
   margin-right: 10px;
   font-size: 0.9em;
-}
+} */
 
 /* AIKA JA PÄIVÄ */
 
@@ -461,6 +463,19 @@ svg {
 
   .weatherarea {
     order: 3;
+  }
+  .day {
+    font-size: 1em;
+  }
+  .icon-now {
+    width: 100%;
+  }
+  .icon-future {
+    width: 75%;
+  }
+  .temp,
+  .description {
+    font-size: 1.2em;
   }
 }
 

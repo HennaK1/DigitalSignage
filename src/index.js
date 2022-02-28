@@ -80,7 +80,7 @@ getWeatherData();
 
 const showWeatherData = (data) => {
   const time = new Date();
-  const next = time.getDay();
+  const next = time.toLocaleString("Fi", { weekday: "long" });
   data.daily.forEach((day, idx) => {
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
@@ -95,8 +95,8 @@ const showWeatherData = (data) => {
     } else if (idx > 0 && idx < 4) {
       futureForecast.innerHTML += `
           <div class="next-week">
-          <div class="days"></div>
             <div class="day">
+            <div class="days">Pv</div>
               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
             </div>
