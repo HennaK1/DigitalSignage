@@ -309,6 +309,7 @@ svg {
   display: flex;
   align-items: center;
   color: white;
+  height: fit-content;
 }
 
 .hsl-content h2 {
@@ -319,6 +320,7 @@ svg {
   height: 40px;
   position: absolute;
   right: 25px;
+  top: 421px;
 }
 .iconpos {
   display: flex;
@@ -334,22 +336,23 @@ svg {
 .timetable {
   list-style-type: none;
   padding: 10px;
+  text-align: center;
 }
 .bus-times {
-<<<<<<< HEAD
-=======
   list-style: none;
->>>>>>> 4f64cacceb299f26bf7c052513ee6595e17864de
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  margin: 10px;
+  margin: 8px;
   align-items: center;
 }
 #bus-nmbr {
   padding: 5px;
   border: 1px solid white;
   border-radius: 5px;
+}
+#bus-destination {
+  font-size: 0.9em;
 }
 hr {
   display: block;
