@@ -56,6 +56,12 @@ const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
+
+/**
+ * Function to add missing zero
+ * @param {number} value current time without zero
+ * @returns time with zero i.e. 15:05.
+ */
 const showMinutes = (value) => {
   if (value < 10) {
     return '0' + value;
@@ -64,7 +70,9 @@ const showMinutes = (value) => {
   }
 };
 
-//  Time and date
+/**
+ * Function to get date and time
+ */
 setInterval(() => {
   const time = new Date();
   const date = time.getDate();
@@ -106,8 +114,8 @@ setInterval(() => {
 }, 1800000);
 
 const showWeatherData = (data) => {
-  const time = new Date();
-  const next = time.getDay();
+  // const time = new Date();
+  // const next = time.toLocaleString("Fi", { weekday: "long" });
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
@@ -124,8 +132,8 @@ const showWeatherData = (data) => {
     } else if (idx > 0 && idx < 4) {
       futureForecast.innerHTML += `
           <div class="next-week">
-          <div class="days"></div>
             <div class="day">
+            <div class="days">Pv</div>
               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
             </div>
