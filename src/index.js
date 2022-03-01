@@ -3,6 +3,8 @@ import HSLData from './modules/hsl-data';
 import FazerData from './modules/fazer-data';
 import announcementData from './modules/announcements-data';
 
+//Defining language
+let langFi = true;
 
 /**
  * Fetching HSL data
@@ -114,11 +116,15 @@ setInterval(() => {
 }, 1800000);
 
 const showWeatherData = (data) => {
-  // const time = new Date();
+
   // const next = time.toLocaleString("Fi", { weekday: "long" });
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
+    const unixTimestamp = day.dt;
+    const milliseconds = unixTimestamp * 1000;
+    const dateObject = new Date(milliseconds);
+    const humanDateFormat = dateObject.toLocaleString("Fi", { weekday: "short" });
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
           <div class="weather-today" id="weather-today">
@@ -133,7 +139,7 @@ const showWeatherData = (data) => {
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
-            <div class="days">Pv</div>
+            <div class="days">${humanDateFormat}</div>
               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
             </div>
@@ -148,8 +154,7 @@ const showWeatherData = (data) => {
  * LUNCH
  */
 
-//Defining language
-let langFi = true;
+
 
 const menuList = document.querySelector('.menu-list');
 let lunchTopic = document.querySelector('.lunch-topic');
