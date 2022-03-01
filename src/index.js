@@ -94,21 +94,31 @@ setInterval(() => {
 /**
  * Weather based of location
  */
-const getWeatherData = () => {
-  navigator.geolocation.getCurrentPosition((success) => {
+const getWeatherData = (fi) => {
+  if (fi === true) {
+    navigator.geolocation.getCurrentPosition((success) => {
+      let { latitude, longitude } = success.coords;
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+        .then(res => res.json()).then(data => {
 
-    let { latitude, longitude } = success.coords;
+          console.log('weather-data', data);
+          showWeatherData(data);
+        });
+    });
+  } else {
+    navigator.geolocation.getCurrentPosition((success) => {
+      let { latitude, longitude } = success.coords;
+      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+        .then(res => res.json()).then(data => {
 
-    fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-      .then(res => res.json()).then(data => {
-
-        console.log('weather-data', data);
-        showWeatherData(data);
-      });
-  });
+          console.log('weather-data', data);
+          showWeatherData(data);
+        });
+    });
+  }
 };
 
-getWeatherData();
+getWeatherData(langFi);
 
 setInterval(() => {
   getWeatherData();
@@ -124,7 +134,7 @@ const showWeatherData = (data) => {
     const unixTimestamp = day.dt;
     const milliseconds = unixTimestamp * 1000;
     const dateObject = new Date(milliseconds);
-    const humanDateFormat = dateObject.toLocaleString("Fi", { weekday: "short" });
+    const humanDateForm = dateObject.toLocaleString("Fi", { weekday: "short" });
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
           <div class="weather-today" id="weather-today">
@@ -139,7 +149,7 @@ const showWeatherData = (data) => {
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
-            <div class="days">${humanDateFormat}</div>
+            <div class="days">${humanDateForm}</div>
               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
             </div>
@@ -238,6 +248,7 @@ const changeLanguage = () => {
   }
   renderFazer(langFi);
   showInfo(langFi);
+  getWeatherData(langFi);
 };
 
 switchLangBtn.addEventListener('click', changeLanguage);
