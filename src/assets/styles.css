@@ -218,6 +218,7 @@ svg {
 .day {
   text-align: center;
   font-size: 0.7em;
+  text-transform: capitalize;
 }
 
 .weather-today,
