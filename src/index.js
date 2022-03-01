@@ -7,31 +7,38 @@ import announcementData from './modules/announcements-data';
 /**
  * Fetching HSL data
  */
-fetchData(HSLData.apiUrl, {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/graphql' },
-  body: HSLData.getQueryForNextRidesByStopId(2132207)
-}).then(response => {
-  console.log(response.data);
-  const stop = response.data.stop;
-  const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+const getHSLData = () => {
+  fetchData(HSLData.apiUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/graphql' },
+    body: HSLData.getQueryForNextRidesByStopId(2132207)
+  }).then(response => {
+    console.log(response.data);
+    const stop = response.data.stop;
+    const stopPattern = response.data.stop.stoptimesWithoutPatterns;
 
-  const hslContent = document.querySelector('.timetable');
+    const hslContent = document.querySelector('.timetable');
 
-  // hslContent.innerHTML += `<p>${stop.name}<br></p>`;
 
-  for (let i = 0; i < 4; i++) {
-    let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-    let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-    hslContent.innerHTML += `
+    // hslContent.innerHTML += `<p>${stop.name}<br></p>`;
+    hslContent.innerHTML = ``;
+    for (let i = 0; i < 4; i++) {
+      let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+      let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+      hslContent.innerHTML += `
     <li class="bus-times">
     <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
     <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
     <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
   </li>
   <hr>`;
-  };
-});
+    };
+  });
+};
+
+setInterval(() => {
+  getHSLData();
+}, 1000);
 
 /**
  * WEATHER
@@ -90,11 +97,19 @@ const getWeatherData = () => {
       });
   });
 };
+
 getWeatherData();
+
+setInterval(() => {
+  getWeatherData();
+  console.log('sää', getWeatherData);
+}, 1800000);
 
 const showWeatherData = (data) => {
   const time = new Date();
   const next = time.getDay();
+  weatherForecastEl.innerHTML = ``;
+  futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
