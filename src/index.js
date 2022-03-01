@@ -15,8 +15,10 @@ const getHSLData = () => {
     headers: { 'Content-Type': 'application/graphql' },
     body: HSLData.getQueryForNextRidesByStopId(2132207)
   }).then(response => {
+    console.log(response.data);
     const stop = response.data.stop;
     const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+
     const hslContent = document.querySelector('.timetable');
 
 
@@ -36,11 +38,9 @@ const getHSLData = () => {
   });
 };
 
-getHSLData();
-
 setInterval(() => {
   getHSLData();
-}, 30000);
+}, 1000);
 
 /**
  * WEATHER
@@ -82,17 +82,11 @@ setInterval(() => {
   const year = time.getFullYear();
   const hours = time.getHours();
   const minutes = time.getMinutes();
-  const weekdayFi = time.toLocaleString("Fi", { weekday: "long" });
-  const weekdayEn = time.toLocaleString("En", { weekday: "long" });
+  let weekday = time.toLocaleString("Fi", { weekday: "long" });
 
   timeEl.innerHTML = hours + ':' + showMinutes(minutes);
   dateEl.innerHTML = date + '.' + month + '.' + year;
-
-  if (langFi) {
-    weekdayEl.innerHTML = weekdayFi;
-  } else {
-    weekdayEl.innerHTML = weekdayEn;
-  }
+  weekdayEl.innerHTML = weekday;
 
 }, 1000);
 
@@ -179,7 +173,6 @@ const renderFazer = (fi) => {
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
     fetchData(FazerData.fazerLunchMenuFiUrl, {}, true).then(data => {
-      console.log('fazermenu: ', FazerData.fazerLunchMenuFiUrl);
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus[0]);
