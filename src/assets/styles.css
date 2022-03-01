@@ -302,6 +302,7 @@ svg {
 
 .transitarea {
   background-color: var(--hsl-sininen);
+  position: relative;
 }
 
 .hsl-content {
@@ -319,8 +320,8 @@ svg {
   width: 40px;
   height: 40px;
   position: absolute;
-  right: 25px;
-  top: 421px;
+  right: 13px;
+  top: 15px;
 }
 .iconpos {
   display: flex;
