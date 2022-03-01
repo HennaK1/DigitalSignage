@@ -9,16 +9,31 @@ let langFi = true;
 /**
  * Fetching HSL data
  */
-const getHSLData = () => {
+const getHSLData = (fi) => {
+  const line = document.querySelector('.line');
+  const busstop = document.querySelector('.stop');
+  const dest = document.querySelector('.dest');
+  const leaving = document.querySelector('.leaving');
+
+  if (fi === true) {
+    line.textContent = `Linja`;
+    busstop.textContent = `Pysäkki`;
+    dest.textContent = `Määränpää`;
+    leaving.textContent = `Lähtee`;
+  } else {
+    line.textContent = `Line`;
+    busstop.textContent = `Stop`;
+    dest.textContent = `Destination`;
+    leaving.textContent = `Leaving`;
+  }
+
   fetchData(HSLData.apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/graphql' },
     body: HSLData.getQueryForNextRidesByStopId(2132207)
   }).then(response => {
-    console.log(response.data);
     const stop = response.data.stop;
     const stopPattern = response.data.stop.stoptimesWithoutPatterns;
-
     const hslContent = document.querySelector('.timetable');
 
 
@@ -30,6 +45,7 @@ const getHSLData = () => {
       hslContent.innerHTML += `
     <li class="bus-times">
     <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+    <div id="bus-stop">${stop.name}</div>
     <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
     <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
   </li>
@@ -38,9 +54,11 @@ const getHSLData = () => {
   });
 };
 
+getHSLData(langFi);
+
 setInterval(() => {
-  getHSLData();
-}, 1000);
+  getHSLData(langFi);
+}, 30000);
 
 /**
  * WEATHER
@@ -54,7 +72,7 @@ const futureForecast = document.getElementById('next-week');
 
 
 const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
-const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+// const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
@@ -82,11 +100,17 @@ setInterval(() => {
   const year = time.getFullYear();
   const hours = time.getHours();
   const minutes = time.getMinutes();
-  let weekday = time.toLocaleString("Fi", { weekday: "long" });
+  const weekdayFi = time.toLocaleString("Fi", { weekday: "long" });
+  const weekdayEn = time.toLocaleString("En", { weekday: "long" });
 
   timeEl.innerHTML = hours + ':' + showMinutes(minutes);
   dateEl.innerHTML = date + '.' + month + '.' + year;
-  weekdayEl.innerHTML = weekday;
+
+  if (langFi) {
+    weekdayEl.innerHTML = weekdayFi;
+  } else {
+    weekdayEl.innerHTML = weekdayEn;
+  }
 
 }, 1000);
 
@@ -173,6 +197,7 @@ const renderFazer = (fi) => {
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
     fetchData(FazerData.fazerLunchMenuFiUrl, {}, true).then(data => {
+      console.log('fazermenu: ', FazerData.fazerLunchMenuFiUrl);
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus[0]);
@@ -249,6 +274,7 @@ const changeLanguage = () => {
   renderFazer(langFi);
   showInfo(langFi);
   getWeatherData(langFi);
+  getHSLData(langFi);
 };
 
 switchLangBtn.addEventListener('click', changeLanguage);
