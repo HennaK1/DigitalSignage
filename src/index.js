@@ -54,7 +54,7 @@ const futureForecast = document.getElementById('next-week');
 
 
 const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
-// const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
