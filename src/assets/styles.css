@@ -343,7 +343,7 @@ svg {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   justify-items: center;
-  margin: 8px;
+  margin: 6px;
   align-items: center;
 }
 #bus-nmbr {
@@ -446,22 +446,17 @@ hr {
 /* MEDIASÄÄNNÖT */
 
 @media screen and (max-width: 1100px) {
-
   .date-container {
     display: none;
   }
 
-
   .info-text {
-  margin-right: 0;
-  padding-right: 10px;
-}
-
-
+    margin-right: 0;
+    padding-right: 10px;
+  }
 }
 
 @media screen and (max-width: 980px) {
-
   .grid-container {
     grid-template-columns: 1fr;
     grid-template-rows: auto;
