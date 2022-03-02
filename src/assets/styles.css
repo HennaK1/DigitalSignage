@@ -107,9 +107,9 @@ nav {
 .grid-container {
   display: grid;
   grid-template-columns: 2fr 1fr;
-  grid-template-rows: 320px 320px;
-  column-gap: 30px;
-  row-gap: 10px;
+  grid-template-rows: 45vh 45vh;
+  column-gap: 25px;
+  row-gap: 1px;
   margin: 0 20px;
   justify-items: center;
 }
@@ -308,7 +308,12 @@ svg {
 }
 
 .menu-list li {
-  margin-top: 10px;
+  margin-top: 5px;
+  font-size: 0.9em;
+}
+
+.restaurant {
+  margin-bottom: 5px;
 }
 
 /* HSL -KORTTI*/
@@ -484,6 +489,24 @@ hr {
 }
 
 /* MEDIASÄÄNNÖT */
+
+@media screen and (min-width: 1500px) {
+  body {
+    font-size: 1.3em;
+  }
+
+  .menu-list li {
+    margin-top: 7px;
+    font-size: 0.85em;
+  }
+
+  .restaurant {
+    margin-bottom: 7px;
+  }
+
+
+}
+
 
 @media screen and (max-width: 1100px) {
   .date-container {
