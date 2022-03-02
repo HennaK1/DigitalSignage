@@ -8,6 +8,13 @@ import { getTodayIndex } from './modules/tools';
 //Defining language
 let langFi = true;
 
+const karamalmiBtn = document.querySelector('#karamalmi');
+const myyrmakiBtn = document.querySelector('#myyrmaki');
+const navbuttons = document.querySelectorAll('.n-link');
+const mobileBtn = document.querySelector('.nav-label');
+const myllypuroBtn = document.querySelector('#myllypuro');
+const arabiaBtn = document.querySelector('#arabia');
+
 /**
  * Fetching HSL data
  */
@@ -29,35 +36,107 @@ const getHSLData = (fi) => {
     leaving.textContent = `Leaving`;
   }
 
-  fetchData(HSLData.apiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/graphql' },
-    body: HSLData.getQueryForNextRidesByStopId(2132207)
-  }).then(response => {
-    const stop = response.data.stop;
-    const stopPattern = response.data.stop.stoptimesWithoutPatterns;
-    const hslContent = document.querySelector('.timetable');
+  if (karamalmiBtn.classList.contains('active')) {
+    fetchData(HSLData.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/graphql' },
+      body: HSLData.getQueryForNextRidesByStopId(2132207)
+    }).then(response => {
+      const stop = response.data.stop;
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.timetable');
 
+      hslContent.innerHTML = ``;
+      for (let i = 0; i < 4; i++) {
+        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+        hslContent.innerHTML += `
+      <li class="bus-times">
+      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+      <div id="bus-stop">${stop.name}</div>
+      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+      </li>
+      <hr>`;
+      };
+    });
+  } else if (myyrmakiBtn.classList.contains('active')) {
+    fetchData(HSLData.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/graphql' },
+      body: HSLData.getQueryForNextRidesByStopId(4150296)
+    }).then(response => {
+      const stop = response.data.stop;
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.timetable');
 
-    // hslContent.innerHTML += `<p>${stop.name}<br></p>`;
-    hslContent.innerHTML = ``;
-    for (let i = 0; i < 4; i++) {
-      let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-      let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-      hslContent.innerHTML += `
-    <li class="bus-times">
-    <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-    <div id="bus-stop">${stop.name}</div>
-    <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-    <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-  </li>
-  <hr>`;
-    };
-  });
+      hslContent.innerHTML = ``;
+      for (let i = 0; i < 4; i++) {
+        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+        hslContent.innerHTML += `
+      <li class="bus-times">
+      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+      <div id="bus-stop">${stop.name}</div>
+      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+    </li>
+    <hr>`;
+      };
+    });
+  } else if (myllypuroBtn.classList.contains('active')) {
+    fetchData(HSLData.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/graphql' },
+      body: HSLData.getQueryForNextRidesByStopId(1454141)
+    }).then(response => {
+      const stop = response.data.stop;
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.timetable');
+
+      hslContent.innerHTML = ``;
+      for (let i = 0; i < 4; i++) {
+        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+        hslContent.innerHTML += `
+      <li class="bus-times">
+      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+      <div id="bus-stop">${stop.name}</div>
+      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+    </li>
+    <hr>`;
+      };
+    });
+  } else if (arabiaBtn.classList.contains('active')) {
+    fetchData(HSLData.apiUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/graphql' },
+      body: HSLData.getQueryForNextRidesByStopId(1230104)
+    }).then(response => {
+      const stop = response.data.stop;
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.timetable');
+
+      hslContent.innerHTML = ``;
+      for (let i = 0; i < 4; i++) {
+        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
+        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+        hslContent.innerHTML += `
+      <li class="bus-times">
+      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+      <div id="bus-stop">${stop.name}</div>
+      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+    </li>
+    <hr>`;
+      };
+    });
+  }
 };
 
 getHSLData(langFi);
-
+//Hsl data updates every 30 seconds
 setInterval(() => {
   getHSLData(langFi);
 }, 30000);
@@ -117,6 +196,7 @@ setInterval(() => {
 /**
  * Weather based of location
  */
+/*
 const getWeatherData = (fi) => {
   if (fi === true) {
     title.textContent = `Sää`;
@@ -151,6 +231,7 @@ getWeatherData(langFi);
 /**
  * Update weather every 30 minutes
  */
+/*
 setInterval(() => {
   getWeatherData();
   console.log('sää', getWeatherData);
@@ -160,6 +241,7 @@ setInterval(() => {
  * Function to show renderd weather data
  * @param {json} data Data from api
  */
+/*
 const showWeatherData = (data) => {
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
@@ -260,9 +342,6 @@ const renderFazerArabia = (fi) => {
   }
 };
 
-
-
-
 const renderSodexoMyyrmaki = (fi) => {
   restaurantName.textContent = `Sodexo Myyrmäki`;
   fetchData(SodexoData.sodexoMyyrmakiDataUrl).then(data => {
@@ -278,7 +357,6 @@ const renderSodexoMyyrmaki = (fi) => {
       showMenu(coursesEn, menuList);
     }
   });
-
 };
 
 const renderSodexoMyllypuro = (fi) => {
@@ -296,9 +374,7 @@ const renderSodexoMyllypuro = (fi) => {
       showMenu(coursesEn, menuList);
     }
   });
-
 };
-
 
 /**
  * Function showing the menu
@@ -316,7 +392,7 @@ const showMenu = (courses, menuList) => {
 };
 
 /**
- * ANNOUNCEMENTS
+ * Function for showing annoucments
  */
 
 const infoText = document.querySelector('.info-text');
@@ -339,7 +415,7 @@ const showInfo = (fi) => {
 showInfo(langFi);
 
 /**
- * LANGUAGE
+ * Function for language change
  */
 
 const currentLangBtn = document.querySelector('.currentLang');
@@ -366,13 +442,13 @@ const changeLanguage = () => {
   }
 
   showInfo(langFi);
-  getWeatherData(langFi);
+  //getWeatherData(langFi);
   getHSLData(langFi);
 };
 switchLangBtn.addEventListener('click', changeLanguage);
 
 /**
- * Sivuston kielen vaihto 30 sekunnin välein
+ * Changing site language every 30 seconds
  */
 setInterval(() => {
   changeLanguage();
@@ -380,17 +456,9 @@ setInterval(() => {
 }, 30000);
 
 
-
 /**
  * CHANGING THE CAMPUS
  */
-
-const navbuttons = document.querySelectorAll('.n-link');
-const karamalmiBtn = document.querySelector('#karamalmi');
-const mobileBtn = document.querySelector('.nav-label');
-const myyrmakiBtn = document.querySelector('#myyrmaki');
-const myllypuroBtn = document.querySelector('#myllypuro');
-const arabiaBtn = document.querySelector('#arabia');
 
 const showCampusKaramalmi = () => {
   karamalmiBtn.classList.add('active');
@@ -416,9 +484,9 @@ const showCampusArabia = () => {
   renderFazerArabia(langFi);
 };
 
-
-
-
+/**
+ * Add event listeners
+ */
 karamalmiBtn.addEventListener('click', () => {
   navbuttons.forEach(elem => {
     elem.classList.remove('active');
