@@ -302,9 +302,8 @@ svg {
 /* MENU -KORTTI */
 
 .menu-list {
-  list-style: circle;
-  padding-left: 40px;
-  overflow: auto;
+  list-style: none;
+  padding-left: 20px;
 }
 
 .menu-list li {
@@ -315,6 +314,26 @@ svg {
 .restaurant {
   margin-bottom: 5px;
 }
+
+.menu-items {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+}
+
+.menu-prices {
+  list-style: none;
+  position: absolute;
+  right: 7px;
+  padding-left: 10px;
+}
+
+.menu-prices li {
+  margin-top: 9px;
+  font-size: 0.7em;
+}
+
 
 /* HSL -KORTTI*/
 

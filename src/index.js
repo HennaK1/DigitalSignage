@@ -191,11 +191,13 @@ const showWeatherData = (data) => {
  */
 
 const menuList = document.querySelector('.menu-list');
+const priceList = document.querySelector('.menu-prices');
 const lunchTopic = document.querySelector('.lunch-topic');
 const restaurantName = document.querySelector('.restaurant');
 
 
 const renderFazerKaramalmi = (fi) => {
+  priceList.style.visibility = 'hidden';
   restaurantName.textContent = `Fazer Karakaarenkuja`;
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
@@ -218,6 +220,7 @@ const renderFazerKaramalmi = (fi) => {
 };
 
 const renderFazerArabia = (fi) => {
+  priceList.style.visibility = 'hidden';
   restaurantName.textContent = `Fazer Arabianranta`;
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
@@ -242,36 +245,44 @@ const renderFazerArabia = (fi) => {
 
 
 const renderSodexoMyyrmaki = (fi) => {
+  priceList.style.visibility = 'visible';
   restaurantName.textContent = `Sodexo Myyrmäki`;
   fetchData(SodexoData.sodexoMyyrmakiDataUrl).then(data => {
     let courses = SodexoData.parseSodexoMenu(data.courses);
     console.log('sodexo', courses);
     const coursesFi = courses[0];
     const coursesEn = courses[1];
+    const prices = courses[2];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
       showMenu(coursesFi, menuList);
+      showPrices(prices);
     } else {
       lunchTopic.textContent = `Today's lunch`;
       showMenu(coursesEn, menuList);
+      showPrices(prices);
     }
   });
 
 };
 
 const renderSodexoMyllypuro = (fi) => {
+  priceList.style.visibility = 'visible';
   restaurantName.textContent = `Sodexo Myllypuro`;
   fetchData(SodexoData.sodexoMyllypuroDataUrl).then(data => {
     let courses = SodexoData.parseSodexoMenu(data.courses);
     console.log('sodexo', courses);
     const coursesFi = courses[0];
     const coursesEn = courses[1];
+    const prices = courses[2];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
       showMenu(coursesFi, menuList);
+      showPrices(prices);
     } else {
       lunchTopic.textContent = `Today's lunch`;
       showMenu(coursesEn, menuList);
+      showPrices(prices);
     }
   });
 
@@ -289,6 +300,15 @@ const showMenu = (courses, menuList) => {
   for (let i = 0; i < courses.length; i++) {
     menuList.innerHTML += `
       <li>${courses[i]}</li>
+      `;
+  };
+};
+
+const showPrices = (prices) => {
+  priceList.innerHTML = ``;
+  for (let i = 0; i < prices.length; i++) {
+    priceList.innerHTML += `
+      <li>${prices[i]}</li>
       `;
   };
 };

@@ -11,14 +11,16 @@ const sodexoMyllypuroDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_j
 const parseSodexoMenu = (menu) => {
   const coursesEn = [];
   const coursesFi = [];
+  const prices = [];
   const courses = Object.values(menu);
   for (const course of courses) {
     const diet = course.dietcodes;
     const price = course.price;
-    coursesEn.push(course.title_en + ' (' + diet + ')' + ' ' + price);
-    coursesFi.push(course.title_fi + ' (' + diet + ')' + ' ' + price);
+    coursesEn.push(course.title_en + ' (' + diet + ')');
+    coursesFi.push(course.title_fi + ' (' + diet + ')');
+    prices.push(price);
   }
-  return [coursesFi, coursesEn];
+  return [coursesFi, coursesEn, prices];
 };
 
 const SodexoData = { parseSodexoMenu, sodexoMyyrmakiDataUrl, sodexoMyllypuroDataUrl };
