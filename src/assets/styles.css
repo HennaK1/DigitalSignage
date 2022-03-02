@@ -92,6 +92,16 @@ nav {
   border-radius: 10px;
 }
 
+/* .n-link {
+  color: black;
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+} */
+
 /* GRID */
 
 .grid-container {

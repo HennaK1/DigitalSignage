@@ -1,6 +1,7 @@
 import { fetchData } from './modules/network';
 import HSLData from './modules/hsl-data';
 import FazerData from './modules/fazer-data';
+import SodexoData from './modules/sodexo-data';
 import announcementData from './modules/announcements-data';
 
 //Defining language
@@ -188,12 +189,13 @@ const showWeatherData = (data) => {
  * LUNCH
  */
 
-
-
 const menuList = document.querySelector('.menu-list');
-let lunchTopic = document.querySelector('.lunch-topic');
+const lunchTopic = document.querySelector('.lunch-topic');
+const restaurantName = document.querySelector('.restaurant');
+
 
 const renderFazer = (fi) => {
+  restaurantName.textContent = `Fazer`;
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
     fetchData(FazerData.fazerLunchMenuFiUrl, {}, true).then(data => {
@@ -214,7 +216,25 @@ const renderFazer = (fi) => {
   }
 };
 
-renderFazer(langFi);
+
+const renderSodexo = (fi) => {
+  restaurantName.textContent = `Sodexo`;
+  fetchData(SodexoData.sodexoDataUrl).then(data => {
+    let courses = SodexoData.parseSodexoMenu(data.courses);
+    console.log('sodexo', courses);
+    const coursesFi = courses[0];
+    const coursesEn = courses[1];
+    if (fi === true) {
+      lunchTopic.textContent = `Päivän lounas`;
+      showMenu(coursesFi, menuList);
+    } else {
+      lunchTopic.textContent = `Today's lunch`;
+      showMenu(coursesEn, menuList);
+    }
+  });
+
+};
+
 
 /**
  * Function showing the menu
@@ -272,9 +292,63 @@ const changeLanguage = () => {
     switchLangBtn.src = "assets/img/united-kingdom.png";
   }
   renderFazer(langFi);
+  renderSodexo(langFi);
   showInfo(langFi);
   getWeatherData(langFi);
   getHSLData(langFi);
 };
 
 switchLangBtn.addEventListener('click', changeLanguage);
+
+
+/**
+ * CHANGING THE CAMPUS
+ */
+
+const navbuttons = document.querySelectorAll('.n-link');
+const karamalmiBtn = document.querySelector('#karamalmi');
+const myyrmakiBtn = document.querySelector('#myyrmaki');
+const myllypuroBtn = document.querySelector('#myllypuro');
+const arabiaBtn = document.querySelector('#arabia');
+
+const showCampusKaramalmi = () => {
+  renderFazer(langFi);
+};
+
+const showCampusMyyrmaki = () => {
+  renderSodexo(langFi);
+};
+
+
+karamalmiBtn.addEventListener('click', () => {
+  navbuttons.forEach(elem => {
+    elem.classList.remove('active');
+  });
+
+  karamalmiBtn.classList.add('active');
+  showCampusKaramalmi();
+
+});
+
+myyrmakiBtn.addEventListener('click', () => {
+  navbuttons.forEach(elem => {
+    elem.classList.remove('active');
+  });
+  myyrmakiBtn.classList.add('active');
+  showCampusMyyrmaki();
+});
+
+myllypuroBtn.addEventListener('click', () => {
+  navbuttons.forEach(elem => {
+    elem.classList.remove('active');
+  });
+  myllypuroBtn.classList.add('active');
+});
+
+arabiaBtn.addEventListener('click', () => {
+  navbuttons.forEach(elem => {
+    elem.classList.remove('active');
+  });
+  arabiaBtn.classList.add('active');
+});
+
