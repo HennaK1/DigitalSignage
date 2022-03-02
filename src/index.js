@@ -73,9 +73,7 @@ const futureForecast = document.getElementById('next-week');
 let title = document.getElementById('weather-change');
 let subtitle = document.getElementById('city-subtitle');
 
-
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
-
 
 /**
  * Function to add missing zero
@@ -148,15 +146,24 @@ const getWeatherData = (fi) => {
 
 getWeatherData(langFi);
 
+
+/**
+ * Update weather every 30 minutes
+ */
 setInterval(() => {
   getWeatherData();
   console.log('sää', getWeatherData);
 }, 1800000);
 
+/**
+ * Function to show renderd weather data
+ * @param {json} data Data from api
+ */
 const showWeatherData = (data) => {
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
+
     const unixTimestamp = day.dt;
     const milliseconds = unixTimestamp * 1000;
     const dateObject = new Date(milliseconds);
