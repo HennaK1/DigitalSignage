@@ -9,7 +9,24 @@ let langFi = true;
 /**
  * Fetching HSL data
  */
-const getHSLData = () => {
+const getHSLData = (fi) => {
+  const line = document.querySelector('.line');
+  const busstop = document.querySelector('.stop');
+  const dest = document.querySelector('.dest');
+  const leaving = document.querySelector('.leaving');
+
+  if (fi === true) {
+    line.textContent = `Linja`;
+    busstop.textContent = `Pysäkki`;
+    dest.textContent = `Määränpää`;
+    leaving.textContent = `Lähtee`;
+  } else {
+    line.textContent = `Line`;
+    busstop.textContent = `Stop`;
+    dest.textContent = `Destination`;
+    leaving.textContent = `Leaving`;
+  }
+
   fetchData(HSLData.apiUrl, {
     method: 'POST',
     headers: { 'Content-Type': 'application/graphql' },
@@ -28,6 +45,7 @@ const getHSLData = () => {
       hslContent.innerHTML += `
     <li class="bus-times">
     <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+    <div id="bus-stop">${stop.name}</div>
     <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
     <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
   </li>
@@ -36,10 +54,10 @@ const getHSLData = () => {
   });
 };
 
-getHSLData();
+getHSLData(langFi);
 
 setInterval(() => {
-  getHSLData();
+  getHSLData(langFi);
 }, 30000);
 
 /**
@@ -256,6 +274,7 @@ const changeLanguage = () => {
   renderFazer(langFi);
   showInfo(langFi);
   getWeatherData(langFi);
+  getHSLData(langFi);
 };
 
 switchLangBtn.addEventListener('click', changeLanguage);

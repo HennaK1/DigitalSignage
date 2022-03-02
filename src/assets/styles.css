@@ -313,7 +313,6 @@ svg {
   display: flex;
   align-items: center;
   color: white;
-  height: fit-content;
 }
 
 .hsl-content h2 {
@@ -336,16 +335,15 @@ svg {
 }
 #hsl-page {
   width: 100%;
+  font-size: 15px;
 }
 .timetable {
   list-style-type: none;
-  padding: 10px;
-  text-align: center;
 }
 .bus-times {
   list-style: none;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
   justify-items: center;
   margin: 6px;
   align-items: center;
@@ -357,6 +355,13 @@ svg {
 }
 #bus-destination {
   font-size: 0.9em;
+  text-align: center;
+}
+#bus-stop {
+  font-size: 0.9em;
+}
+#bus-arriving {
+  margin-left: 30px;
 }
 hr {
   display: block;
@@ -364,6 +369,26 @@ hr {
   border: 0;
   border-top: 1px solid #ccc;
   padding: 0;
+}
+.hsl-headings {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10px;
+  font-size: 14px;
+  column-gap: 10px;
+}
+.line {
+  margin-left: 28px;
+}
+.stop {
+  margin-left: 15px;
+}
+.leaving {
+  margin-right: 10px;
+}
+.dest {
+  margin-left: 7px;
 }
 
 /* HAMPPARI MENU */
@@ -555,6 +580,18 @@ hr {
   .temp,
   .description {
     font-size: 1.2em;
+  }
+  .line {
+    margin-left: 10%;
+  }
+  .stop {
+    margin-left: 22px;
+  }
+  .dest {
+    margin-right: 14px;
+  }
+  .leaving {
+    margin-right: 7%;
   }
 }
 
