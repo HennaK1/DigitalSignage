@@ -19,7 +19,8 @@ const parseFazerMenu = (menu) => {
     for (const meal of meals) {
       const name = meal.Name;
       const diet = meal.Diets;
-      course.push(name + ' (' + diet + ')');
+
+      course.push(name + ' (' + diet.toString().replaceAll(',', ', ') + ')');
     }
   }
   return course;

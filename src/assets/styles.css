@@ -494,6 +494,15 @@ hr {
     margin-top: 1rem;
   }
 
+  .info-text {
+    font-size: 1.1em;
+    line-height: 1.2em;
+  }
+
+  .menu-list {
+    font-size: 1.1em;
+  }
+
   .nav-container {
     padding: 0 50px 15px 270px;
     width: 100%;
