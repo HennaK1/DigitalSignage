@@ -342,9 +342,10 @@ svg {
 }
 #hsl-data {
   margin-top: 20px;
+  width: fit-content;
 }
 #hsl-page {
-  width: 100%;
+  width: 120%;
   font-size: 15px;
 }
 .timetable {
@@ -389,13 +390,13 @@ hr {
   column-gap: 10px;
 }
 .line {
-  margin-left: 28px;
+  margin-left: 39px;
 }
 .stop {
   margin-left: 15px;
 }
 .leaving {
-  margin-right: 10px;
+  margin-right: 19px;
 }
 .dest {
   margin-left: 7px;
@@ -492,6 +493,9 @@ hr {
   .info-text {
     margin-right: 0;
     padding-right: 10px;
+  }
+  #hsl-page {
+    width: 110%;
   }
 }
 
@@ -654,5 +658,11 @@ hr {
 
   .card-header {
     padding: 0 10px;
+  }
+  #hsl-page {
+    width: 90%;
+  }
+  .leaving {
+    margin-right: 12px;
   }
 }

@@ -297,8 +297,16 @@ const changeLanguage = () => {
   getWeatherData(langFi);
   getHSLData(langFi);
 };
-
 switchLangBtn.addEventListener('click', changeLanguage);
+
+/**
+ * Sivuston kielen vaihto 30 sekunnin välein
+ */
+setInterval(() => {
+  changeLanguage();
+  console.log('kielen vaihto', changeLanguage);
+}, 30000);
+
 
 
 /**
