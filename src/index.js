@@ -22,7 +22,7 @@ const getHSLData = (fi) => {
     dest.textContent = `Määränpää`;
     leaving.textContent = `Lähtee`;
   } else {
-    line.textContent = `Line`;
+    line.textContent = `Route`;
     busstop.textContent = `Stop`;
     dest.textContent = `Destination`;
     leaving.textContent = `Leaving`;
@@ -70,10 +70,9 @@ const dateEl = document.getElementById('date');
 const weekdayEl = document.getElementById('weekday');
 const weatherForecastEl = document.getElementById('weather-today');
 const futureForecast = document.getElementById('next-week');
+let title = document.getElementById('weather-change');
+let subtitle = document.getElementById('city-subtitle');
 
-
-const daysFI = ['Ma', 'Ti', 'Ke', 'To', 'Pe', 'La', 'Su'];
-// const daysEN = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
@@ -121,6 +120,8 @@ setInterval(() => {
  */
 const getWeatherData = (fi) => {
   if (fi === true) {
+    title.textContent = `Sää`;
+    subtitle.textContent = `Tänään`;
     navigator.geolocation.getCurrentPosition((success) => {
       let { latitude, longitude } = success.coords;
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
@@ -131,6 +132,8 @@ const getWeatherData = (fi) => {
         });
     });
   } else {
+    title.textContent = `Weather`;
+    subtitle.textContent = `Today`;
     navigator.geolocation.getCurrentPosition((success) => {
       let { latitude, longitude } = success.coords;
       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
@@ -151,15 +154,15 @@ setInterval(() => {
 }, 1800000);
 
 const showWeatherData = (data) => {
-
-  // const next = time.toLocaleString("Fi", { weekday: "long" });
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
     const unixTimestamp = day.dt;
     const milliseconds = unixTimestamp * 1000;
     const dateObject = new Date(milliseconds);
-    const humanDateForm = dateObject.toLocaleString("Fi", { weekday: "short" });
+    const humanDateFormFi = dateObject.toLocaleString("Fi", { weekday: "short" });
+    const humanDateFormEn = dateObject.toLocaleString("En", { weekday: "short" });
+
     if (idx === 0) {
       weatherForecastEl.innerHTML += `
           <div class="weather-today" id="weather-today">
@@ -170,11 +173,22 @@ const showWeatherData = (data) => {
           `;
       console.log('tänään', day.weather[0]);
       console.log('indeksi tänään', idx);
+    } else if (idx > 0 && idx < 4 && langFi) {
+      futureForecast.innerHTML += `
+          <div class="next-week">
+            <div class="day">
+            <div class="days" id="days">${humanDateFormFi}</div>
+              <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+              <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+            </div>
+          </div>
+          `;
+      console.log('indeksi next', idx);
     } else if (idx > 0 && idx < 4) {
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
-            <div class="days">${humanDateForm}</div>
+            <div class="days" id="days">${humanDateFormEn}</div>
               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
             </div>
@@ -182,6 +196,7 @@ const showWeatherData = (data) => {
           `;
       console.log('indeksi next', idx);
     }
+
   });
 };
 

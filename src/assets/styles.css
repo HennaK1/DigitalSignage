@@ -251,13 +251,9 @@ svg {
   width: 70%;
 }
 
-/* .future-forecast-item {
-  width: 90px;
-  height: 90px;
-  border: 1px solid black;
-  margin-right: 10px;
-  font-size: 0.9em;
-} */
+.change {
+  padding: 0;
+}
 
 /* AIKA JA PÄIVÄ */
 
