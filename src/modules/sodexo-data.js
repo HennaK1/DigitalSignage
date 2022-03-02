@@ -1,6 +1,7 @@
 import { todayISODate } from "./tools";
 
-const sodexoDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_json/152/${todayISODate}`;
+const sodexoMyyrmakiDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_json/152/${todayISODate}`;
+const sodexoMyllypuroDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_json/158/${todayISODate}`;
 
 /**
  * Extract course titles from Sodexo menu JSON object
@@ -20,5 +21,5 @@ const parseSodexoMenu = (menu) => {
   return [coursesFi, coursesEn];
 };
 
-const SodexoData = { parseSodexoMenu, sodexoDataUrl };
+const SodexoData = { parseSodexoMenu, sodexoMyyrmakiDataUrl, sodexoMyllypuroDataUrl };
 export default SodexoData;
