@@ -498,16 +498,18 @@ switchLangBtn.addEventListener('click', () => {
 });
 
 /**
- * Changing site language every 30 seconds
+ * Changing language automatically every 30 seconds only
+ * when screen size is over 1500px (widescreen)
  */
-setInterval(() => {
-  //Onko logiikka kunnossa?
-  //leveyden katsominen tähän if else
-  changeLanguage();
-  console.log('kielen vaihto', changeLanguage);
+ setInterval(() => {
+  if (window.matchMedia("(min-width: 1500px)").matches) {
+    console.log("Screen width is over 1500px");
+    console.log('kielen vaihto', changeLanguage);
+    changeLanguage();
+  } else {
+    console.log("Screen less than 1500px");
+  }
 }, 30000);
-
-//resize event
 
 
 /**
