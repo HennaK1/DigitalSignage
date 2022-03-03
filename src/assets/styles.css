@@ -30,6 +30,10 @@ body {
   width: 100%;
 }
 
+.hideOverflow {
+  overflow: hidden;
+}
+
 /* NAVIGAATIO */
 
 .logo {
@@ -50,6 +54,7 @@ body {
 }
 
 .arrowdown {
+  display: block;
   width: 15px;
   margin-right: 25px;
   cursor: pointer;
@@ -155,7 +160,7 @@ nav {
 .card-content {
   background-color: white;
   height: 100%;
-  padding: 18px 15px;
+  padding: 18px 10px;
   flex-basis: 70%;
   display: flex;
   flex-flow: column;
@@ -298,18 +303,30 @@ svg {
 /* MENU -KORTTI */
 
 .menu-list {
-  list-style: circle;
-  padding-left: 40px;
+  list-style: none;
+  padding-left: 20px;
   overflow: auto;
 }
 
-.menu-list li {
-  margin-top: 5px;
-  font-size: 0.9em;
+.restaurant-prices {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: var(--metropolia-harmaa);
 }
 
-.restaurant {
-  margin-bottom: 5px;
+.menu-course {
+  margin-top: 7px;
+  font-size: 0.9em;
+  padding-right: 5px;
+}
+
+.menu-price {
+  color: var(--metropolia-oranssi);
+  list-style: none;
+  font-size: 0.8em;
+  margin-top: 0;
 }
 
 /* HSL -KORTTI*/
@@ -487,6 +504,10 @@ hr {
 /* MEDIASÄÄNNÖT */
 
 @media screen and (min-width: 1500px) {
+  .arrowdown {
+    display: none;
+  }
+
   body {
     font-size: 1.3em;
   }
@@ -632,7 +653,7 @@ hr {
   }
 }
 
-@media screen and (max-width: 630px) {
+@media screen and (max-width: 700px) {
   .nav-label {
     top: 55px;
     left: 34px;
@@ -669,7 +690,16 @@ hr {
   }
 
   .card-content {
+    padding: 18px 15px;
     width: 100%;
+  }
+
+  .menu-list {
+    padding-left: 10px;
+  }
+
+  .menu-price {
+    font-size: 0.7em;
   }
 
   .card-img {

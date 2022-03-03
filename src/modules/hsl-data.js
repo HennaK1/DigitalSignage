@@ -31,3 +31,6 @@ const getQueryForNextRidesByStopId = (id) => {
 
 const HSLData = { apiUrl, getQueryForNextRidesByStopId };
 export default HSLData;
+
+
+

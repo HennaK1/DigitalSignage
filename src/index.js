@@ -44,7 +44,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(2132207)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.timetable');
 
       hslContent.innerHTML = ``;
@@ -68,7 +67,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(4150296)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.timetable');
 
       hslContent.innerHTML = ``;
@@ -92,21 +90,35 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1454141)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.timetable');
+      const destination = document.querySelector('#bus-destination');
 
       hslContent.innerHTML = ``;
       for (let i = 0; i < 4; i++) {
         let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-        hslContent.innerHTML += `
-      <li class="bus-times">
-      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-      <div id="bus-stop">${stop.name}</div>
-      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-    </li>
-    <hr>`;
+        if (stop.stoptimesWithoutPatterns[i].headsign === null) {
+          console.log('moromoro');
+          hslContent.innerHTML += `
+          <li class="bus-times">
+          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+          <div id="bus-stop">${stop.name}</div>
+          <div id="bus-destination">Tylypahka</div>
+          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+        </li>
+        <hr>`;
+        } else {
+          console.log('hellohello');
+          hslContent.innerHTML += `
+          <li class="bus-times">
+          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+          <div id="bus-stop">${stop.name}</div>
+          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+        </li>
+        <hr>`;
+        }
+
       };
     });
   } else if (arabiaBtn.classList.contains('active')) {
@@ -116,7 +128,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1230104)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.timetable');
 
       hslContent.innerHTML = ``;
@@ -299,10 +310,12 @@ setInterval(() => {
 const menuList = document.querySelector('.menu-list');
 const lunchTopic = document.querySelector('.lunch-topic');
 const restaurantName = document.querySelector('.restaurant');
+const restaurantPrices = document.querySelector('.restaurant-prices');
 
 
 const renderFazerKaramalmi = (fi) => {
   restaurantName.textContent = `Fazer Karakaarenkuja`;
+  restaurantPrices.textContent = ``;
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
     fetchData(FazerData.fazerLunchMenuKaramalmiFiUrl, {}, true).then(data => {
@@ -310,7 +323,9 @@ const renderFazerKaramalmi = (fi) => {
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
-      showMenu(course, menuList);
+      const menu = course[0];
+      const prices = course[1];
+      showMenu(menu, menuList, prices);
     });
   } else {
     lunchTopic.textContent = `Today's lunch`;
@@ -318,20 +333,25 @@ const renderFazerKaramalmi = (fi) => {
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
-      showMenu(course, menuList);
+      const menu = course[0];
+      const prices = course[1];
+      showMenu(menu, menuList, prices);
     });
   }
 };
 
 const renderFazerArabia = (fi) => {
   restaurantName.textContent = `Fazer Arabianranta`;
+  restaurantPrices.textContent = ``;
   if (fi === true) {
     lunchTopic.textContent = `Päivän lounas`;
     fetchData(FazerData.fazerLunchMenuKaramalmiFiUrl, {}, true).then(data => {
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
-      showMenu(course, menuList);
+      const menu = course[0];
+      const prices = course[1];
+      showMenu(menu, menuList, prices);
     });
   } else {
     lunchTopic.textContent = `Today's lunch`;
@@ -339,41 +359,56 @@ const renderFazerArabia = (fi) => {
       const menuData = JSON.parse(data.contents);
       console.log(menuData);
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
-      showMenu(course, menuList);
+      const menu = course[0];
+      const prices = course[1];
+      showMenu(menu, menuList, prices);
     });
   }
 };
 
 const renderSodexoMyyrmaki = (fi) => {
   restaurantName.textContent = `Sodexo Myyrmäki`;
+  if (langFi) {
+    restaurantPrices.textContent = `Opiskelija / Henkilökunta / Muut`;
+  } else {
+    restaurantPrices.textContent = `Student / Personnel / Other`;
+  }
+
   fetchData(SodexoData.sodexoMyyrmakiDataUrl).then(data => {
     let courses = SodexoData.parseSodexoMenu(data.courses);
     console.log('sodexo', courses);
     const coursesFi = courses[0];
     const coursesEn = courses[1];
+    const prices = courses[2];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
-      showMenu(coursesFi, menuList);
+      showMenu(coursesFi, menuList, prices);
     } else {
       lunchTopic.textContent = `Today's lunch`;
-      showMenu(coursesEn, menuList);
+      showMenu(coursesEn, menuList, prices);
     }
   });
 };
 
 const renderSodexoMyllypuro = (fi) => {
   restaurantName.textContent = `Sodexo Myllypuro`;
+  if (langFi) {
+    restaurantPrices.textContent = `Opiskelija / Henkilökunta / Muut`;
+  } else {
+    restaurantPrices.textContent = `Student / Personnel / Other`;
+  }
   fetchData(SodexoData.sodexoMyllypuroDataUrl).then(data => {
     let courses = SodexoData.parseSodexoMenu(data.courses);
     console.log('sodexo', courses);
     const coursesFi = courses[0];
     const coursesEn = courses[1];
+    const prices = courses[2];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
-      showMenu(coursesFi, menuList);
+      showMenu(coursesFi, menuList, prices);
     } else {
       lunchTopic.textContent = `Today's lunch`;
-      showMenu(coursesEn, menuList);
+      showMenu(coursesEn, menuList, prices);
     }
   });
 };
@@ -384,13 +419,21 @@ const renderSodexoMyllypuro = (fi) => {
  * @param {array} courses course's names
  * @param {array} menuList list of courses
  */
-const showMenu = (courses, menuList) => {
+const showMenu = (courses, menuList, prices) => {
   menuList.innerHTML = ``;
   for (let i = 0; i < courses.length; i++) {
-    menuList.innerHTML += `
-      <li>${courses[i]}</li>
+    if (prices[i] === null) {
+      menuList.innerHTML += `
+      <li class="menu-course">${courses[i]}</li>
       `;
+    } else {
+      menuList.innerHTML += `
+      <li class="menu-course">${courses[i]}</li>
+      <li class="menu-price">${prices[i]}</li>
+      `;
+    }
   };
+
 };
 
 /**
@@ -447,7 +490,12 @@ const changeLanguage = () => {
   // getWeatherData(langFi);
   getHSLData(langFi);
 };
-switchLangBtn.addEventListener('click', changeLanguage);
+
+switchLangBtn.addEventListener('click', () => {
+  toggleCheckLanguage.checked = false;
+  body.classList.remove('hideOverflow');
+  changeLanguage();
+});
 
 /**
  * Changing site language every 30 seconds
@@ -535,3 +583,33 @@ const init = () => {
 };
 
 init();
+
+const toggleCheck = document.querySelector('#toggleCheck');
+const toggleCheckLanguage = document.querySelector('#toggleCheckLanguage');
+const body = document.querySelector('body');
+
+
+toggleCheck.addEventListener('click', () => {
+  if (toggleCheck.checked === true) {
+    console.log('klikkasit menun auki');
+    body.classList.add('hideOverflow');
+  } else {
+    console.log('suljit menun');
+    body.classList.remove('hideOverflow');
+  }
+});
+
+for (let i = 0; i < navbuttons.length; i++) {
+  navbuttons[i].addEventListener('click', () => {
+    console.log('klikkasit elementtiä');
+    toggleCheck.checked = false;
+    body.classList.remove('hideOverflow');
+  });
+};
+
+
+
+
+
+
+
