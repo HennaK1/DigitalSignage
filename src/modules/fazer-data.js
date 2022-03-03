@@ -5,10 +5,8 @@ const fazerLunchMenuKaramalmiEnUrl = `https://www.foodandco.fi/api/restaurant/me
 const fazerLunchMenuArabiaFiUrl = `https://www.foodandco.fi/api/restaurant/menu/week?language=fi&restaurantPageId=321259&weekDate=${todayISODate}`;
 const fazerLunchMenuArabiaEnUrl = `https://www.foodandco.fi/api/restaurant/menu/week?language=en&restaurantPageId=321259&weekDate=${todayISODate}`;
 
-
-
 /**
- * Extract vegan diets from Fazer menu JSON object
+ * Parsing Fazer menu JSON object
  *
  * @param {string} menu - JSON Menu to be parsed
  */

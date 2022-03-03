@@ -4,7 +4,7 @@ const sodexoMyyrmakiDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_js
 const sodexoMyllypuroDataUrl = `https://www.sodexo.fi/ruokalistat/output/daily_json/158/${todayISODate}`;
 
 /**
- * Extract course titles from Sodexo menu JSON object
+ * Parsing Sodexo menu JSON object
  *
  * @param {string} menu - JSON Menu to be parsed
  */

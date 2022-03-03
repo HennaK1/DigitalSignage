@@ -9,9 +9,12 @@ const todayISODate = new Date().toISOString().split('T')[0];
  * @returns
  */
 const getTodayIndex = () => {
-  // NOTE: doesn't work on Sundays
-  // TODO: ^ fix it!
-  const weekDayIndex = new Date().getDay() - 1;
+  let weekDayIndex = new Date().getDay();
+  if (weekDayIndex === 0) {
+    weekDayIndex = 7;
+  } else {
+    weekDayIndex -= 1;
+  }
   return weekDayIndex;
 };
 

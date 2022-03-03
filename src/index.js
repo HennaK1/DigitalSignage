@@ -5,22 +5,47 @@ import SodexoData from './modules/sodexo-data';
 import announcementData from './modules/announcements-data';
 import { getTodayIndex } from './modules/tools';
 
-//Defining language
+// Defining language
 let langFi = true;
 
+// Selecting DOM elements
 const karamalmiBtn = document.querySelector('#karamalmi');
 const myyrmakiBtn = document.querySelector('#myyrmaki');
 const navbuttons = document.querySelectorAll('.n-link');
 const mobileBtn = document.querySelector('.nav-label');
 const myllypuroBtn = document.querySelector('#myllypuro');
 const arabiaBtn = document.querySelector('#arabia');
+const menuList = document.querySelector('.menu-list');
+const lunchTopic = document.querySelector('.lunch-topic');
+const restaurantName = document.querySelector('.restaurant');
+const restaurantPrices = document.querySelector('.restaurant-prices');
+const timeEl = document.getElementById('time');
+const dateEl = document.getElementById('date');
+const weekdayEl = document.getElementById('weekday');
+const weatherForecastEl = document.getElementById('weather-today');
+const futureForecast = document.getElementById('next-week');
+let title = document.getElementById('weather-change');
+let subtitle = document.getElementById('city-subtitle');
+const infoText = document.querySelector('.info-text');
+const infoTopic = document.querySelector('.info-topic');
+const infoDate = document.querySelector('.info-date');
+const currentLangBtn = document.querySelector('.currentLang');
+const switchLangBtn = document.querySelector('.switchLang');
+const toggleCheck = document.querySelector('#toggleCheck');
+const toggleCheckLanguage = document.querySelector('#toggleCheckLanguage');
+const body = document.querySelector('body');
+
 
 /**
- * Fetching HSL data
+ * HSL AREA
+ */
+
+/**
+ *
+ * @param {boolean} fi defining language as a parameter
  */
 const getHSLData = (fi) => {
   let busstop = document.getElementById('find-stop');
-  // let stopAddress = document.getElementById('stop-address');
   const route = document.querySelector('.route');
   const dest = document.querySelector('.dest');
   const leaving = document.querySelector('.leaving');
@@ -43,7 +68,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(2132207)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
@@ -67,7 +91,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(4150296)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
@@ -91,7 +114,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1454141)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
@@ -126,7 +148,6 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1230104)
     }).then(response => {
       const stop = response.data.stop;
-      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
       const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
@@ -146,7 +167,6 @@ const getHSLData = (fi) => {
   }
 };
 
-
 getHSLData(langFi);
 
 // Hsl data updates every 30 seconds
@@ -154,17 +174,12 @@ setInterval(() => {
   getHSLData(langFi);
 }, 30000);
 
+
+
 /**
- * WEATHER
+ * WEATHER AREA
  */
 
-const timeEl = document.getElementById('time');
-const dateEl = document.getElementById('date');
-const weekdayEl = document.getElementById('weekday');
-const weatherForecastEl = document.getElementById('weather-today');
-const futureForecast = document.getElementById('next-week');
-let title = document.getElementById('weather-change');
-let subtitle = document.getElementById('city-subtitle');
 
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
@@ -303,16 +318,16 @@ setInterval(() => {
 //   });
 // };
 
+
+
 /**
- * LUNCH
+ * LUNCH AREA
  */
 
-const menuList = document.querySelector('.menu-list');
-const lunchTopic = document.querySelector('.lunch-topic');
-const restaurantName = document.querySelector('.restaurant');
-const restaurantPrices = document.querySelector('.restaurant-prices');
-
-
+/**
+ * Function to render Fazer Karamalmi data
+ * @param {boolean} fi defining lang as a parameter
+ */
 const renderFazerKaramalmi = (fi) => {
   restaurantName.textContent = `Fazer Karakaarenkuja`;
   restaurantPrices.textContent = ``;
@@ -340,6 +355,10 @@ const renderFazerKaramalmi = (fi) => {
   }
 };
 
+/**
+ * Function to render Fazer Arabia data
+ * @param {boolean} fi defining lang as a parameter
+ */
 const renderFazerArabia = (fi) => {
   restaurantName.textContent = `Fazer Arabianranta`;
   restaurantPrices.textContent = ``;
@@ -366,6 +385,10 @@ const renderFazerArabia = (fi) => {
   }
 };
 
+/**
+ * Function to render Sodexo Myyrmäki data
+ * @param {boolean} fi defining lang as a parameter
+ */
 const renderSodexoMyyrmaki = (fi) => {
   restaurantName.textContent = `Sodexo Myyrmäki`;
   if (langFi) {
@@ -390,6 +413,11 @@ const renderSodexoMyyrmaki = (fi) => {
   });
 };
 
+
+/**
+ * Function to render Sodexo Myllypuro data
+ * @param {boolean} fi defining lang as a parameter
+ */
 const renderSodexoMyllypuro = (fi) => {
   restaurantName.textContent = `Sodexo Myllypuro`;
   if (langFi) {
@@ -414,10 +442,11 @@ const renderSodexoMyllypuro = (fi) => {
 };
 
 /**
- * Function showing the menu
+ * Function showing the daily menu, courses names and prices
  *
  * @param {array} courses course's names
  * @param {array} menuList list of courses
+ * @param {array} prices list of prices
  */
 const showMenu = (courses, menuList, prices) => {
   menuList.innerHTML = ``;
@@ -437,13 +466,13 @@ const showMenu = (courses, menuList, prices) => {
 };
 
 /**
- * Function for showing annoucments
+ * INFO AREA
  */
 
-const infoText = document.querySelector('.info-text');
-const infoTopic = document.querySelector('.info-topic');
-const infoDate = document.querySelector('.info-date');
-
+/**
+ * Function for showing announcments
+ * @param {boolean} fi defining lang as a parameter
+ */
 const showInfo = (fi) => {
   if (fi === true) {
     infoTopic.textContent = announcementData.announcementsFi.Announcements[0].Name;
@@ -459,13 +488,15 @@ const showInfo = (fi) => {
 
 showInfo(langFi);
 
+
+/**
+ * LANGUAGE OPTIONS
+ */
+
+
 /**
  * Function for language change
  */
-
-const currentLangBtn = document.querySelector('.currentLang');
-const switchLangBtn = document.querySelector('.switchLang');
-
 const changeLanguage = () => {
   if (langFi) {
     currentLangBtn.src = "assets/img/united-kingdom.png";
@@ -485,35 +516,29 @@ const changeLanguage = () => {
   } else {
     renderFazerArabia(langFi);
   }
-
   showInfo(langFi);
   // getWeatherData(langFi);
   getHSLData(langFi);
 };
 
-switchLangBtn.addEventListener('click', () => {
-  toggleCheckLanguage.checked = false;
-  body.classList.remove('hideOverflow');
-  changeLanguage();
-});
 
 /**
  * Changing language automatically every 30 seconds only
  * when screen size is over 1500px (widescreen)
  */
 setInterval(() => {
-  if (window.matchMedia("(min-width: 1500px)").matches) {
-    console.log("Screen width is over 1500px");
+  if (window.matchMedia("(min-width: 1900px)").matches) {
+    console.log("Screen width is over 1900px");
     console.log('kielen vaihto', changeLanguage);
     changeLanguage();
   } else {
-    console.log("Screen less than 1500px");
+    console.log("Screen less than 1900px");
   }
 }, 30000);
 
 
 /**
- * CHANGING THE CAMPUS
+ * FUNCTIONS CHANGING THE CAMPUS
  */
 
 const showCampusKaramalmi = () => {
@@ -545,22 +570,19 @@ const showCampusArabia = () => {
 };
 
 /**
- * Add event listeners
+ * EVENT LISTENERS
  */
 karamalmiBtn.addEventListener('click', () => {
   navbuttons.forEach(elem => {
     elem.classList.remove('active');
   });
-
   showCampusKaramalmi();
-
 });
 
 myyrmakiBtn.addEventListener('click', () => {
   navbuttons.forEach(elem => {
     elem.classList.remove('active');
   });
-
   showCampusMyyrmaki();
 });
 
@@ -568,7 +590,6 @@ myllypuroBtn.addEventListener('click', () => {
   navbuttons.forEach(elem => {
     elem.classList.remove('active');
   });
-
   showCampusMyllypuro();
 });
 
@@ -576,20 +597,14 @@ arabiaBtn.addEventListener('click', () => {
   navbuttons.forEach(elem => {
     elem.classList.remove('active');
   });
-
   showCampusArabia();
 });
 
-const init = () => {
-  showCampusKaramalmi();
-};
-
-init();
-
-const toggleCheck = document.querySelector('#toggleCheck');
-const toggleCheckLanguage = document.querySelector('#toggleCheckLanguage');
-const body = document.querySelector('body');
-
+switchLangBtn.addEventListener('click', () => {
+  toggleCheckLanguage.checked = false;
+  body.classList.remove('hideOverflow');
+  changeLanguage();
+});
 
 toggleCheck.addEventListener('click', () => {
   if (toggleCheck.checked === true) {
@@ -608,6 +623,21 @@ for (let i = 0; i < navbuttons.length; i++) {
     body.classList.remove('hideOverflow');
   });
 };
+
+
+/**
+ * Init function to show Karamalmi data by default
+ */
+const init = () => {
+  showCampusKaramalmi();
+};
+
+init();
+
+
+
+
+
 
 
 

@@ -151,7 +151,7 @@ nav {
 .campus {
   margin-top: 3px;
   font-family: boldattuteksti;
-  font-size: 0.9em;
+  font-size: 1em;
   letter-spacing: 0.5px;
   text-transform: uppercase;
   color: var(--metropolia-harmaa);
@@ -205,6 +205,8 @@ nav {
 /* INFO -KORTTI */
 
 .info-text {
+  font-size: 1em;
+  line-height: 1.3em;
   overflow-y: auto;
   padding-right: 10px;
   margin-right: 10px;
@@ -303,6 +305,7 @@ svg {
 /* MENU -KORTTI */
 
 .menu-list {
+  margin-top: 2px;
   list-style: none;
   padding-left: 20px;
   overflow: auto;
@@ -318,7 +321,7 @@ svg {
 
 .menu-course {
   margin-top: 7px;
-  font-size: 0.9em;
+  font-size: 1em;
   padding-right: 5px;
 }
 
@@ -358,6 +361,7 @@ svg {
   padding-bottom: 5px;
   font-size: 1.1em;
 }
+
 .transport-info {
   display: flex;
   margin: 10px 0;
@@ -365,13 +369,17 @@ svg {
   border-bottom: 1px solid;
   padding-bottom: 8px;
 }
+
 #full-width {
   flex-basis: 100%;
 }
+
 #bus-destination {
   flex: 1;
   text-align: center;
+  font-size: 0.9em;
 }
+
 #bus-nmbr {
   width: 3.1em;
   /* height: 1.5em; */
@@ -379,18 +387,20 @@ svg {
   border-radius: 5px;
   text-align: center;
 }
-#bus-arriving {
-  /* width: 40px; */
-  /* color: black; */
-}
+
 #hsl-stop {
   display: flex;
   flex-flow: row;
   column-gap: 10px;
 }
+
 .stop-address {
   color: white;
   margin-bottom: 5px;
+}
+
+.dest {
+  padding-left: 20px;
 }
 
 /* HAMPPARI MENU */
@@ -476,30 +486,71 @@ svg {
 
 /* MEDIASÄÄNNÖT */
 
-@media screen and (min-width: 1500px) {
+@media screen and (min-width: 1900px) {
   .arrowdown {
     display: none;
   }
 
+  .language {
+    margin: 0 25px;
+  }
+
+  .card-content {
+    padding: 18px 5px;
+  }
+
   body {
-    font-size: 1.3em;
+    font-size: 1.2em;
   }
 
-  .menu-list li {
-    margin-top: 7px;
-    font-size: 0.85em;
+  .menu-course {
+    font-size: 0.8em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    margin-right: 20px;
   }
 
-  .restaurant {
-    margin-bottom: 7px;
+  .menu-price {
+    font-size: 0.65em;
+    float: right;
+    margin-top: -16px;
+    margin-right: 20px;
   }
-  #hsl-page {
-    font-size: 22px;
-    margin-top: 10px;
+
+  .restaurant-prices {
+    margin-bottom: 5px;
   }
-  .hsl-headings {
-    font-size: 20px;
+
+  .hsl-page {
+    margin-top: 5px;
   }
+
+  .transport-info {
+    margin: 15px 0;
+    padding-bottom: 15px;
+  }
+
+  #city-subtitle {
+    margin-bottom: 20px;
+  }
+
+  .next-week {
+    margin-top: 20px;
+  }
+
+  .icon-future {
+    /* margin: 5px 0 5px 0; */
+    width: 60%;
+  }
+  .icon-now {
+    /* margin: 5px 0 5px 0; */
+    width: 80%;
+  }
+
+  .days {
+    font-size: 1em;
+  }
+
 }
 
 @media screen and (max-width: 1100px) {
@@ -549,11 +600,11 @@ svg {
 
   .info-text {
     font-size: 1.1em;
-    line-height: 1.2em;
+    line-height: 1.25em;
   }
 
   .menu-list {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 
   .nav-container {
@@ -607,7 +658,7 @@ svg {
   }
   .temp,
   .description {
-    font-size: 1.2em;
+    font-size: 1.1em;
   }
 }
 
