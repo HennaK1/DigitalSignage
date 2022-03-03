@@ -72,7 +72,6 @@
         <div class="card-content weather-content">
           <div class="card-header change">
             <h2 class="city" id="weather-change">Sää</h2>
-
           </div>
           <h3 class="campus" id="city-subtitle"></h3>
           <div class="weather-today" id="weather-today"></div>
@@ -97,24 +96,27 @@
       </article>
       <!-- HSL -->
       <article class="card transitarea">
-        <div class="card-content small hsl-content">
-          <div class="card-header small-header iconpos">
+        <div class="card-content hsl-content" id="full-width">
+          <div class="card-header small-header">
             <h2>HSL</h2>
-            <img class="bus-icon" src="./assets/img/bus-school.png" alt="bussi ikoni">
           </div>
-          <section id="hsl-page">
+          <h3 class="campus stop-address" id="find-stop"></h3>
+          <div class="hsl-page">
             <div class="hsl-headings">
-              <div class="line"></div>
-              <div class="stop"></div>
+              <div class="route"></div>
               <div class="dest"></div>
               <div class="leaving"></div>
             </div>
-            <hr>
-            <ul class="timetable">
-            </ul>
-          </section>
-        </div>
-      </article>
+            <div class="hsl-stuff" >
+              <div class="transport-info">
+                <div id="bus-nmbr"></div>
+                <div id="bus-destination"></div>
+                <div id="bus-arriving"></div>
+              </div>
+            </div>
+          </div>
+      </div>
+    </article>
     </div>
   </main>
 </body>

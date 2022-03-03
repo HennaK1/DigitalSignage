@@ -329,78 +329,49 @@ svg {
 .hsl-content h2 {
   color: white;
 }
-.bus-icon {
-  width: 40px;
-  height: 40px;
-  position: absolute;
-  right: 13px;
-  top: 15px;
-}
-.iconpos {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-#hsl-data {
-  margin-top: 20px;
-  width: fit-content;
-}
-#hsl-page {
-  width: 120%;
-  font-size: 15px;
-}
-.timetable {
-  list-style-type: none;
-}
-.bus-times {
-  list-style: none;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  justify-items: center;
-  margin: 6px;
-  align-items: center;
-}
-#bus-nmbr {
-  padding: 5px;
-  border: 1px solid white;
-  border-radius: 5px;
-}
-#bus-destination {
-  font-size: 0.9em;
-  text-align: center;
-}
-#bus-stop {
-  font-size: 0.9em;
-}
-#bus-arriving {
-  margin-left: 30px;
-}
-hr {
-  display: block;
-  height: 1px;
-  border: 0;
-  border-top: 1px solid #ccc;
-  padding: 0;
+.hsl-page {
+  width: 100%;
 }
 .hsl-headings {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
   margin-top: 10px;
-  font-size: 14px;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
+  font-size: 1.1em;
+}
+.transport-info {
+  display: flex;
+  margin: 10px 0;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  padding-bottom: 8px;
+}
+#full-width {
+  flex-basis: 100%;
+}
+#bus-destination {
+  flex: 1;
+  text-align: center;
+}
+#bus-nmbr {
+  width: 3.1em;
+  /* height: 1.5em; */
+  border: 2px solid #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+#bus-arriving {
+  /* width: 40px; */
+  /* color: black; */
+}
+#hsl-stop {
+  display: flex;
+  flex-flow: row;
   column-gap: 10px;
 }
-.line {
-  margin-left: 39px;
-}
-.stop {
-  margin-left: 15px;
-}
-.leaving {
-  margin-right: 19px;
-}
-.dest {
-  margin-left: 7px;
+.stop-address {
+  color: white;
 }
 
 /* HAMPPARI MENU */
@@ -517,9 +488,6 @@ hr {
     margin-right: 0;
     padding-right: 10px;
   }
-  #hsl-page {
-    width: 110%;
-  }
 }
 
 @media screen and (max-width: 980px) {
@@ -618,18 +586,6 @@ hr {
   .description {
     font-size: 1.2em;
   }
-  .line {
-    margin-left: 10%;
-  }
-  .stop {
-    margin-left: 22px;
-  }
-  .dest {
-    margin-right: 14px;
-  }
-  .leaving {
-    margin-right: 7%;
-  }
 }
 
 @media screen and (max-width: 630px) {
@@ -685,11 +641,5 @@ hr {
 
   .card-header {
     padding: 0 10px;
-  }
-  #hsl-page {
-    width: 90%;
-  }
-  .leaving {
-    margin-right: 12px;
   }
 }
