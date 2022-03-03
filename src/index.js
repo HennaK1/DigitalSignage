@@ -37,6 +37,7 @@ const getHSLData = (fi) => {
   }
 
   if (karamalmiBtn.classList.contains('active')) {
+    console.log('moi');
     fetchData(HSLData.apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/graphql' },
@@ -136,10 +137,11 @@ const getHSLData = (fi) => {
 };
 
 getHSLData(langFi);
+
 //Hsl data updates every 30 seconds
-setInterval(() => {
-  getHSLData(langFi);
-}, 30000);
+// setInterval(() => {
+//   getHSLData(langFi);
+// }, 30000);
 
 /**
  * WEATHER
@@ -196,99 +198,99 @@ setInterval(() => {
 /**
  * Weather based of location
  */
-/*
-const getWeatherData = (fi) => {
-  if (fi === true) {
-    title.textContent = `Sää`;
-    subtitle.textContent = `Tänään`;
-    navigator.geolocation.getCurrentPosition((success) => {
-      let { latitude, longitude } = success.coords;
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-        .then(res => res.json()).then(data => {
 
-          console.log('weather-data', data);
-          showWeatherData(data);
-        });
-    });
-  } else {
-    title.textContent = `Weather`;
-    subtitle.textContent = `Today`;
-    navigator.geolocation.getCurrentPosition((success) => {
-      let { latitude, longitude } = success.coords;
-      fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-        .then(res => res.json()).then(data => {
+// const getWeatherData = (fi) => {
+//   if (fi === true) {
+//     title.textContent = `Sää`;
+//     subtitle.textContent = `Tänään`;
+//     navigator.geolocation.getCurrentPosition((success) => {
+//       let { latitude, longitude } = success.coords;
+//       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+//         .then(res => res.json()).then(data => {
 
-          console.log('weather-data', data);
-          showWeatherData(data);
-        });
-    });
-  }
-};
+//           console.log('weather-data', data);
+//           showWeatherData(data);
+//         });
+//     });
+//   } else {
+//     title.textContent = `Weather`;
+//     subtitle.textContent = `Today`;
+//     navigator.geolocation.getCurrentPosition((success) => {
+//       let { latitude, longitude } = success.coords;
+//       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
+//         .then(res => res.json()).then(data => {
 
-getWeatherData(langFi);
+//           console.log('weather-data', data);
+//           showWeatherData(data);
+//         });
+//     });
+//   }
+// };
+
+// getWeatherData(langFi);
 
 
 /**
  * Update weather every 30 minutes
  */
-/*
-setInterval(() => {
-  getWeatherData();
-  console.log('sää', getWeatherData);
-}, 1800000);
+
+// setInterval(() => {
+//   getWeatherData();
+//   console.log('sää', getWeatherData);
+// }, 1800000);
 
 /**
  * Function to show renderd weather data
  * @param {json} data Data from api
  */
-/*
-const showWeatherData = (data) => {
-  weatherForecastEl.innerHTML = ``;
-  futureForecast.innerHTML = ``;
-  data.daily.forEach((day, idx) => {
 
-    const unixTimestamp = day.dt;
-    const milliseconds = unixTimestamp * 1000;
-    const dateObject = new Date(milliseconds);
-    const humanDateFormFi = dateObject.toLocaleString("Fi", { weekday: "short" });
-    const humanDateFormEn = dateObject.toLocaleString("En", { weekday: "short" });
+// const showWeatherData = (data) => {
+//   weatherForecastEl.innerHTML = ``;
+//   futureForecast.innerHTML = ``;
+//   data.daily.forEach((day, idx) => {
 
-    if (idx === 0) {
-      weatherForecastEl.innerHTML += `
-          <div class="weather-today" id="weather-today">
-            <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
-            <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-            <div class="description">${day.weather[0].description}</div>
-          </div>
-          `;
-      console.log('tänään', day.weather[0]);
-      console.log('indeksi tänään', idx);
-    } else if (idx > 0 && idx < 4 && langFi) {
-      futureForecast.innerHTML += `
-          <div class="next-week">
-            <div class="day">
-            <div class="days" id="days">${humanDateFormFi}</div>
-              <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-              <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-            </div>
-          </div>
-          `;
-      console.log('indeksi next', idx);
-    } else if (idx > 0 && idx < 4) {
-      futureForecast.innerHTML += `
-          <div class="next-week">
-            <div class="day">
-            <div class="days" id="days">${humanDateFormEn}</div>
-              <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-              <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-            </div>
-          </div>
-          `;
-      console.log('indeksi next', idx);
-    }
+//     const unixTimestamp = day.dt;
+//     const milliseconds = unixTimestamp * 1000;
+//     const dateObject = new Date(milliseconds);
+//     const humanDateFormFi = dateObject.toLocaleString("Fi", { weekday: "short" });
+//     const humanDateFormEn = dateObject.toLocaleString("En", { weekday: "short" });
 
-  });
-};
+//     if (idx === 0) {
+//       weatherForecastEl.innerHTML += `
+//           <div class="weather-today" id="weather-today">
+//             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
+//             <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+//             <div class="description">${day.weather[0].description}</div>
+//           </div>
+//           `;
+//       console.log('tänään', day.weather[0]);
+//       console.log('indeksi tänään', idx);
+//     } else if (idx > 0 && idx < 4 && langFi) {
+//       futureForecast.innerHTML += `
+//           <div class="next-week">
+//             <div class="day">
+//             <div class="days" id="days">${humanDateFormFi}</div>
+//               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+//               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+//             </div>
+//           </div>
+//           `;
+//       console.log('indeksi next', idx);
+//     } else if (idx > 0 && idx < 4) {
+//       futureForecast.innerHTML += `
+//           <div class="next-week">
+//             <div class="day">
+//             <div class="days" id="days">${humanDateFormEn}</div>
+//               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
+//               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
+//             </div>
+//           </div>
+//           `;
+//       console.log('indeksi next', idx);
+//     }
+
+//   });
+// };
 
 /**
  * LUNCH
@@ -442,7 +444,7 @@ const changeLanguage = () => {
   }
 
   showInfo(langFi);
-  //getWeatherData(langFi);
+  // getWeatherData(langFi);
   getHSLData(langFi);
 };
 switchLangBtn.addEventListener('click', changeLanguage);
@@ -451,9 +453,13 @@ switchLangBtn.addEventListener('click', changeLanguage);
  * Changing site language every 30 seconds
  */
 setInterval(() => {
+  //Onko logiikka kunnossa?
+  //leveyden katsominen tähän if else
   changeLanguage();
   console.log('kielen vaihto', changeLanguage);
 }, 30000);
+
+//resize event
 
 
 /**
@@ -464,24 +470,28 @@ const showCampusKaramalmi = () => {
   karamalmiBtn.classList.add('active');
   mobileBtn.innerHTML = `Karamalmi <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderFazerKaramalmi(langFi);
+  getHSLData(langFi);
 };
 
 const showCampusMyyrmaki = () => {
   myyrmakiBtn.classList.add('active');
   mobileBtn.innerHTML = `Myyrmäki <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderSodexoMyyrmaki(langFi);
+  getHSLData(langFi);
 };
 
 const showCampusMyllypuro = () => {
   mobileBtn.innerHTML = `Myllypuro <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   myllypuroBtn.classList.add('active');
   renderSodexoMyllypuro(langFi);
+  getHSLData(langFi);
 };
 
 const showCampusArabia = () => {
   mobileBtn.innerHTML = `Arabia <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   arabiaBtn.classList.add('active');
   renderFazerArabia(langFi);
+  getHSLData(langFi);
 };
 
 /**
