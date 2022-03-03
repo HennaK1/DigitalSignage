@@ -19,21 +19,20 @@ const arabiaBtn = document.querySelector('#arabia');
  * Fetching HSL data
  */
 const getHSLData = (fi) => {
-  const line = document.querySelector('.line');
-  const busstop = document.querySelector('.stop');
+  let busstop = document.getElementById('find-stop');
+  // let stopAddress = document.getElementById('stop-address');
+  const route = document.querySelector('.route');
   const dest = document.querySelector('.dest');
   const leaving = document.querySelector('.leaving');
 
   if (fi === true) {
-    line.textContent = `Linja`;
-    busstop.textContent = `Pysäkki`;
+    route.textContent = `Linja`;
     dest.textContent = `Määränpää`;
-    leaving.textContent = `Lähtee`;
+    leaving.textContent = `Saapuu`;
   } else {
-    line.textContent = `Route`;
-    busstop.textContent = `Stop`;
+    route.textContent = `Route`;
     dest.textContent = `Destination`;
-    leaving.textContent = `Leaving`;
+    leaving.textContent = `Arriving`;
   }
 
   if (karamalmiBtn.classList.contains('active')) {
@@ -44,20 +43,21 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(2132207)
     }).then(response => {
       const stop = response.data.stop;
-      const hslContent = document.querySelector('.timetable');
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
+      busstop.innerHTML = `${stop.name}`;
       for (let i = 0; i < 4; i++) {
         let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
         hslContent.innerHTML += `
-      <li class="bus-times">
-      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-      <div id="bus-stop">${stop.name}</div>
-      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-      </li>
-      <hr>`;
+        <div class="transport-info">
+          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+        </div>
+        `;
       };
     });
   } else if (myyrmakiBtn.classList.contains('active')) {
@@ -67,20 +67,21 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(4150296)
     }).then(response => {
       const stop = response.data.stop;
-      const hslContent = document.querySelector('.timetable');
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
+      busstop.innerHTML = `${stop.name}`;
       for (let i = 0; i < 4; i++) {
         let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
         hslContent.innerHTML += `
-      <li class="bus-times">
-      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-      <div id="bus-stop">${stop.name}</div>
-      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-    </li>
-    <hr>`;
+        <div class="transport-info">
+          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+        </div>
+        `;
       };
     });
   } else if (myllypuroBtn.classList.contains('active')) {
@@ -90,35 +91,32 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1454141)
     }).then(response => {
       const stop = response.data.stop;
-      const hslContent = document.querySelector('.timetable');
-      const destination = document.querySelector('#bus-destination');
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
+      busstop.innerHTML = `${stop.name}`;
       for (let i = 0; i < 4; i++) {
         let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
+
         if (stop.stoptimesWithoutPatterns[i].headsign === null) {
           console.log('moromoro');
           hslContent.innerHTML += `
-          <li class="bus-times">
+          <div class="transport-info">
           <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-stop">${stop.name}</div>
           <div id="bus-destination">Tylypahka</div>
           <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </li>
-        <hr>`;
+        </div>`;
         } else {
           console.log('hellohello');
           hslContent.innerHTML += `
-          <li class="bus-times">
+          <div class="transport-info">
           <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-stop">${stop.name}</div>
           <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
           <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </li>
-        <hr>`;
+        </div>`;
         }
-
       };
     });
   } else if (arabiaBtn.classList.contains('active')) {
@@ -128,31 +126,33 @@ const getHSLData = (fi) => {
       body: HSLData.getQueryForNextRidesByStopId(1230104)
     }).then(response => {
       const stop = response.data.stop;
-      const hslContent = document.querySelector('.timetable');
+      const stopPattern = response.data.stop.stoptimesWithoutPatterns;
+      const hslContent = document.querySelector('.hsl-stuff');
 
       hslContent.innerHTML = ``;
+      busstop.innerHTML = `${stop.name}`;
       for (let i = 0; i < 4; i++) {
         let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
         hslContent.innerHTML += `
-      <li class="bus-times">
-      <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-      <div id="bus-stop">${stop.name}</div>
-      <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-      <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-    </li>
-    <hr>`;
+        <div class="transport-info">
+          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
+          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
+          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
+        </div>
+        `;
       };
     });
   }
 };
 
+
 getHSLData(langFi);
 
-//Hsl data updates every 30 seconds
-// setInterval(() => {
-//   getHSLData(langFi);
-// }, 30000);
+// Hsl data updates every 30 seconds
+setInterval(() => {
+  getHSLData(langFi);
+}, 30000);
 
 /**
  * WEATHER
@@ -501,7 +501,7 @@ switchLangBtn.addEventListener('click', () => {
  * Changing language automatically every 30 seconds only
  * when screen size is over 1500px (widescreen)
  */
- setInterval(() => {
+setInterval(() => {
   if (window.matchMedia("(min-width: 1500px)").matches) {
     console.log("Screen width is over 1500px");
     console.log('kielen vaihto', changeLanguage);
