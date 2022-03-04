@@ -3,6 +3,7 @@ import HSLData from './modules/hsl-data';
 import FazerData from './modules/fazer-data';
 import SodexoData from './modules/sodexo-data';
 import announcementData from './modules/announcements-data';
+import weatherData from './modules/weather-data';
 import { getTodayIndex } from './modules/tools';
 
 // Defining language
@@ -11,10 +12,10 @@ let langFi = true;
 // Selecting DOM elements
 const karamalmiBtn = document.querySelector('#karamalmi');
 const myyrmakiBtn = document.querySelector('#myyrmaki');
-const navbuttons = document.querySelectorAll('.n-link');
-const mobileBtn = document.querySelector('.nav-label');
 const myllypuroBtn = document.querySelector('#myllypuro');
 const arabiaBtn = document.querySelector('#arabia');
+const navbuttons = document.querySelectorAll('.n-link');
+const mobileBtn = document.querySelector('.nav-label');
 const menuList = document.querySelector('.menu-list');
 const lunchTopic = document.querySelector('.lunch-topic');
 const restaurantName = document.querySelector('.restaurant');
@@ -22,13 +23,6 @@ const restaurantPrices = document.querySelector('.restaurant-prices');
 const timeEl = document.getElementById('time');
 const dateEl = document.getElementById('date');
 const weekdayEl = document.getElementById('weekday');
-const weatherForecastEl = document.getElementById('weather-today');
-const futureForecast = document.getElementById('next-week');
-let title = document.getElementById('weather-change');
-let subtitle = document.getElementById('city-subtitle');
-const infoText = document.querySelector('.info-text');
-const infoTopic = document.querySelector('.info-topic');
-const infoDate = document.querySelector('.info-date');
 const currentLangBtn = document.querySelector('.currentLang');
 const switchLangBtn = document.querySelector('.switchLang');
 const toggleCheck = document.querySelector('#toggleCheck');
@@ -40,155 +34,24 @@ const body = document.querySelector('body');
  * HSL AREA
  */
 
-/**
- *
- * @param {boolean} fi defining language as a parameter
- */
-const getHSLData = (fi) => {
-  let busstop = document.getElementById('find-stop');
-  const route = document.querySelector('.route');
-  const dest = document.querySelector('.dest');
-  const leaving = document.querySelector('.leaving');
-
-  if (fi === true) {
-    route.textContent = `Linja`;
-    dest.textContent = `Määränpää`;
-    leaving.textContent = `Saapuu`;
-  } else {
-    route.textContent = `Route`;
-    dest.textContent = `Destination`;
-    leaving.textContent = `Arriving`;
-  }
-
-  if (karamalmiBtn.classList.contains('active')) {
-    console.log('moi');
-    fetchData(HSLData.apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/graphql' },
-      body: HSLData.getQueryForNextRidesByStopId(2132207)
-    }).then(response => {
-      const stop = response.data.stop;
-      const hslContent = document.querySelector('.hsl-stuff');
-
-      hslContent.innerHTML = ``;
-      busstop.innerHTML = `${stop.name}`;
-      for (let i = 0; i < 4; i++) {
-        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-        hslContent.innerHTML += `
-        <div class="transport-info">
-          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </div>
-        `;
-      };
-    });
-  } else if (myyrmakiBtn.classList.contains('active')) {
-    fetchData(HSLData.apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/graphql' },
-      body: HSLData.getQueryForNextRidesByStopId(4150296)
-    }).then(response => {
-      const stop = response.data.stop;
-      const hslContent = document.querySelector('.hsl-stuff');
-
-      hslContent.innerHTML = ``;
-      busstop.innerHTML = `${stop.name}`;
-      for (let i = 0; i < 4; i++) {
-        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-        hslContent.innerHTML += `
-        <div class="transport-info">
-          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </div>
-        `;
-      };
-    });
-  } else if (myllypuroBtn.classList.contains('active')) {
-    fetchData(HSLData.apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/graphql' },
-      body: HSLData.getQueryForNextRidesByStopId(1454141)
-    }).then(response => {
-      const stop = response.data.stop;
-      const hslContent = document.querySelector('.hsl-stuff');
-
-      hslContent.innerHTML = ``;
-      busstop.innerHTML = `${stop.name}`;
-      for (let i = 0; i < 4; i++) {
-        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-
-        if (stop.stoptimesWithoutPatterns[i].headsign === null) {
-          console.log('moromoro');
-          hslContent.innerHTML += `
-          <div class="transport-info">
-          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-destination">Tylypahka</div>
-          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </div>`;
-        } else {
-          console.log('hellohello');
-          hslContent.innerHTML += `
-          <div class="transport-info">
-          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </div>`;
-        }
-      };
-    });
-  } else if (arabiaBtn.classList.contains('active')) {
-    fetchData(HSLData.apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/graphql' },
-      body: HSLData.getQueryForNextRidesByStopId(1230104)
-    }).then(response => {
-      const stop = response.data.stop;
-      const hslContent = document.querySelector('.hsl-stuff');
-
-      hslContent.innerHTML = ``;
-      busstop.innerHTML = `${stop.name}`;
-      for (let i = 0; i < 4; i++) {
-        let date = new Date(parseInt(stop.stoptimesWithoutPatterns[i].realtimeArrival + stop.stoptimesWithoutPatterns[i].serviceDay) * 1000);
-        let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
-        hslContent.innerHTML += `
-        <div class="transport-info">
-          <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
-          <div id="bus-destination">${stop.stoptimesWithoutPatterns[i].headsign}</div>
-          <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
-        </div>
-        `;
-      };
-    });
-  }
-};
-
-getHSLData(langFi);
+HSLData.getHSLData(langFi);
 
 // Hsl data updates every 30 seconds
 setInterval(() => {
-  getHSLData(langFi);
+  HSLData.getHSLData(langFi);
 }, 30000);
 
 
-
 /**
- * WEATHER AREA
+ * CLOCK AND DATE
  */
-
-
-const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
 /**
  * Function to add missing zero
  * @param {number} value current time without zero
  * @returns time with zero i.e. 15:05.
  */
-const showMinutes = (value) => {
+ const showMinutes = (value) => {
   if (value < 10) {
     return '0' + value;
   } else {
@@ -220,105 +83,20 @@ setInterval(() => {
 
 }, 1000);
 
-
 /**
- * Weather based of location
+ * WEATHER AREA
  */
 
-// const getWeatherData = (fi) => {
-//   if (fi === true) {
-//     title.textContent = `Sää`;
-//     subtitle.textContent = `Tänään`;
-//     navigator.geolocation.getCurrentPosition((success) => {
-//       let { latitude, longitude } = success.coords;
-//       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-//         .then(res => res.json()).then(data => {
-
-//           console.log('weather-data', data);
-//           showWeatherData(data);
-//         });
-//     });
-//   } else {
-//     title.textContent = `Weather`;
-//     subtitle.textContent = `Today`;
-//     navigator.geolocation.getCurrentPosition((success) => {
-//       let { latitude, longitude } = success.coords;
-//       fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-//         .then(res => res.json()).then(data => {
-
-//           console.log('weather-data', data);
-//           showWeatherData(data);
-//         });
-//     });
-//   }
-// };
-
-// getWeatherData(langFi);
-
+weatherData.getWeatherData(langFi);
 
 /**
  * Update weather every 30 minutes
  */
 
-// setInterval(() => {
-//   getWeatherData();
-//   console.log('sää', getWeatherData);
-// }, 1800000);
-
-/**
- * Function to show renderd weather data
- * @param {json} data Data from api
- */
-
-// const showWeatherData = (data) => {
-//   weatherForecastEl.innerHTML = ``;
-//   futureForecast.innerHTML = ``;
-//   data.daily.forEach((day, idx) => {
-
-//     const unixTimestamp = day.dt;
-//     const milliseconds = unixTimestamp * 1000;
-//     const dateObject = new Date(milliseconds);
-//     const humanDateFormFi = dateObject.toLocaleString("Fi", { weekday: "short" });
-//     const humanDateFormEn = dateObject.toLocaleString("En", { weekday: "short" });
-
-//     if (idx === 0) {
-//       weatherForecastEl.innerHTML += `
-//           <div class="weather-today" id="weather-today">
-//             <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-now">
-//             <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-//             <div class="description">${day.weather[0].description}</div>
-//           </div>
-//           `;
-//       console.log('tänään', day.weather[0]);
-//       console.log('indeksi tänään', idx);
-//     } else if (idx > 0 && idx < 4 && langFi) {
-//       futureForecast.innerHTML += `
-//           <div class="next-week">
-//             <div class="day">
-//             <div class="days" id="days">${humanDateFormFi}</div>
-//               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-//               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-//             </div>
-//           </div>
-//           `;
-//       console.log('indeksi next', idx);
-//     } else if (idx > 0 && idx < 4) {
-//       futureForecast.innerHTML += `
-//           <div class="next-week">
-//             <div class="day">
-//             <div class="days" id="days">${humanDateFormEn}</div>
-//               <img src="http://openweathermap.org/img/wn//${day.weather[0].icon}@2x.png" alt="sää-kuvaus" class="icon-future">
-//               <div class="temp">${day.temp.day.toFixed(0)}&#176;C</div>
-//             </div>
-//           </div>
-//           `;
-//       console.log('indeksi next', idx);
-//     }
-
-//   });
-// };
-
-
+setInterval(() => {
+  weatherData.getWeatherData();
+  console.log('sää', weatherData.getWeatherData);
+}, 1800000);
 
 /**
  * LUNCH AREA
@@ -469,30 +247,11 @@ const showMenu = (courses, menuList, prices) => {
  * INFO AREA
  */
 
-/**
- * Function for showing announcments
- * @param {boolean} fi defining lang as a parameter
- */
-const showInfo = (fi) => {
-  if (fi === true) {
-    infoTopic.textContent = announcementData.announcementsFi.Announcements[0].Name;
-    infoText.textContent = announcementData.announcementsFi.Announcements[0].Information;
-    infoDate.textContent = announcementData.announcementsFi.Announcements[0].Date;
-  } else {
-    infoTopic.textContent = announcementData.announcementsEn.Announcements[0].Name;
-    infoText.textContent = announcementData.announcementsEn.Announcements[0].Information;
-    infoDate.textContent = announcementData.announcementsEn.Announcements[0].Date;
-  }
-
-};
-
-showInfo(langFi);
-
+announcementData.showInfo(langFi);
 
 /**
  * LANGUAGE OPTIONS
  */
-
 
 /**
  * Function for language change
@@ -516,9 +275,9 @@ const changeLanguage = () => {
   } else {
     renderFazerArabia(langFi);
   }
-  showInfo(langFi);
-  // getWeatherData(langFi);
-  getHSLData(langFi);
+  announcementData.showInfo(langFi);
+  weatherData.getWeatherData(langFi);
+  HSLData.getHSLData(langFi);
 };
 
 
@@ -545,28 +304,28 @@ const showCampusKaramalmi = () => {
   karamalmiBtn.classList.add('active');
   mobileBtn.innerHTML = `Karamalmi <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderFazerKaramalmi(langFi);
-  getHSLData(langFi);
+  HSLData.getHSLData(langFi);
 };
 
 const showCampusMyyrmaki = () => {
   myyrmakiBtn.classList.add('active');
   mobileBtn.innerHTML = `Myyrmäki <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderSodexoMyyrmaki(langFi);
-  getHSLData(langFi);
+  HSLData.getHSLData(langFi);
 };
 
 const showCampusMyllypuro = () => {
   mobileBtn.innerHTML = `Myllypuro <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   myllypuroBtn.classList.add('active');
   renderSodexoMyllypuro(langFi);
-  getHSLData(langFi);
+  HSLData.getHSLData(langFi);
 };
 
 const showCampusArabia = () => {
   mobileBtn.innerHTML = `Arabia <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   arabiaBtn.classList.add('active');
   renderFazerArabia(langFi);
-  getHSLData(langFi);
+  HSLData.getHSLData(langFi);
 };
 
 /**
