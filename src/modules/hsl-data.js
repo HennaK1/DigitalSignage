@@ -54,7 +54,6 @@ const getHSLData = (fi) => {
     leaving.textContent = `Arriving`;
   }
   if (karamalmiBtn.classList.contains('active')) {
-    console.log('moi');
     fetchData(HSLData.apiUrl, {
       method: 'POST',
       headers: { 'Content-Type': 'application/graphql' },
@@ -116,7 +115,6 @@ const getHSLData = (fi) => {
         let localeSpecificTime = date.toLocaleTimeString('fi-FI', { hour: 'numeric', minute: 'numeric' });
 
         if (stop.stoptimesWithoutPatterns[i].headsign === null) {
-          console.log('moromoro');
           hslContent.innerHTML += `
           <div class="transport-info">
           <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>
@@ -124,7 +122,6 @@ const getHSLData = (fi) => {
           <div id="bus-arriving">${localeSpecificTime.replace('PM', '')}</div>
         </div>`;
         } else {
-          console.log('hellohello');
           hslContent.innerHTML += `
           <div class="transport-info">
           <div id="bus-nmbr">${stop.stoptimesWithoutPatterns[i].trip.routeShortName}</div>

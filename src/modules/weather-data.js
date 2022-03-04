@@ -40,6 +40,7 @@ const getWeatherData = (fi) => {
   }
 };
 
+
 /**
  * Function to show renderd weather data
  * @param {json} data Data from api
@@ -48,7 +49,7 @@ const getWeatherData = (fi) => {
  const showWeatherData = (data) => {
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
-  data.daily.forEach((day, idx, langFi) => {
+  data.daily.forEach((day, idx) => {
 
     const unixTimestamp = day.dt;
     const milliseconds = unixTimestamp * 1000;

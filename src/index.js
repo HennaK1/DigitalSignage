@@ -92,7 +92,6 @@ weatherData.getWeatherData(langFi);
 /**
  * Update weather every 30 minutes
  */
-
 setInterval(() => {
   weatherData.getWeatherData();
   console.log('sää', weatherData.getWeatherData);
