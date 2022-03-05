@@ -3,9 +3,6 @@ let subtitle = document.getElementById('city-subtitle');
 const weatherForecastEl = document.getElementById('weather-today');
 const futureForecast = document.getElementById('next-week');
 
-// Defining language
-let langFi = true;
-
 const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
 /**
@@ -22,7 +19,7 @@ const getWeatherData = (fi) => {
         .then(res => res.json()).then(data => {
 
           console.log('weather-data', data);
-          showWeatherData(data);
+          showWeatherData(data, fi);
         });
     });
   } else {
@@ -34,7 +31,7 @@ const getWeatherData = (fi) => {
         .then(res => res.json()).then(data => {
 
           console.log('weather-data', data);
-          showWeatherData(data);
+          showWeatherData(data, fi);
         });
     });
   }
@@ -46,7 +43,7 @@ const getWeatherData = (fi) => {
  * @param {json} data Data from api
  */
 
- const showWeatherData = (data) => {
+const showWeatherData = (data, fi) => {
   weatherForecastEl.innerHTML = ``;
   futureForecast.innerHTML = ``;
   data.daily.forEach((day, idx) => {
@@ -67,7 +64,8 @@ const getWeatherData = (fi) => {
           `;
       console.log('tänään', day.weather[0]);
       console.log('indeksi tänään', idx);
-    } else if (idx > 0 && idx < 4 && langFi) {
+    }
+    if (idx > 0 && idx < 4 && fi) {
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
@@ -79,6 +77,7 @@ const getWeatherData = (fi) => {
           `;
       console.log('indeksi next', idx);
     } else if (idx > 0 && idx < 4) {
+      console.log('HALOO ENKKU!');
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
@@ -93,5 +92,5 @@ const getWeatherData = (fi) => {
   });
 };
 
-const weatherData = {getWeatherData, showWeatherData};
+const weatherData = { getWeatherData, showWeatherData };
 export default weatherData;

@@ -51,7 +51,7 @@ setInterval(() => {
  * @param {number} value current time without zero
  * @returns time with zero i.e. 15:05.
  */
- const showMinutes = (value) => {
+const showMinutes = (value) => {
   if (value < 10) {
     return '0' + value;
   } else {
