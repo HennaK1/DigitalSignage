@@ -97,6 +97,7 @@ setInterval(() => {
   console.log('sää', weatherData.getWeatherData);
 }, 1800000);
 
+
 /**
  * LUNCH AREA
  */
@@ -132,6 +133,7 @@ const renderFazerKaramalmi = (fi) => {
   }
 };
 
+
 /**
  * Function to render Fazer Arabia data
  * @param {boolean} fi defining lang as a parameter
@@ -161,6 +163,7 @@ const renderFazerArabia = (fi) => {
     });
   }
 };
+
 
 /**
  * Function to render Sodexo Myyrmäki data
@@ -217,6 +220,7 @@ const renderSodexoMyllypuro = (fi) => {
     }
   });
 };
+
 
 /**
  * Function showing the daily menu, courses names and prices
