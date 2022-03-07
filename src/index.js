@@ -29,6 +29,20 @@ const toggleCheck = document.querySelector('#toggleCheck');
 const toggleCheckLanguage = document.querySelector('#toggleCheckLanguage');
 const body = document.querySelector('body');
 
+/**
+ * Service worker for pwa
+ */
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').then(registration => {
+      console.log('SW registered: ', registration);
+    }).catch(registrationError => {
+      console.log('SW registration failed: ', registrationError);
+    });
+  });
+}
+
 
 /**
  * HSL AREA
@@ -96,6 +110,7 @@ setInterval(() => {
   console.log('sää', weatherData.getWeatherData);
 }, 1800000);
 
+
 /**
  * LUNCH AREA
  */
@@ -131,6 +146,7 @@ const renderFazerKaramalmi = (fi) => {
   }
 };
 
+
 /**
  * Function to render Fazer Arabia data
  * @param {boolean} fi defining lang as a parameter
@@ -160,6 +176,7 @@ const renderFazerArabia = (fi) => {
     });
   }
 };
+
 
 /**
  * Function to render Sodexo Myyrmäki data
@@ -216,6 +233,7 @@ const renderSodexoMyllypuro = (fi) => {
     }
   });
 };
+
 
 /**
  * Function showing the daily menu, courses names and prices
