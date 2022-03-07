@@ -86,7 +86,6 @@ setInterval(() => {
 /**
  * WEATHER AREA
  */
-
 weatherData.getWeatherData(langFi);
 
 /**

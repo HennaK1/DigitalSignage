@@ -10,7 +10,7 @@ const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
 
 /**
  * Weather based of location
- * @param {boolean} fi
+ * @param {boolean} fi default language finnish
  */
 const getWeatherData = (fi) => {
   if (fi === true) {
@@ -78,7 +78,7 @@ const getWeatherData = (fi) => {
           </div>
           `;
       console.log('indeksi next', idx);
-    } else if (idx > 0 && idx < 4) {
+    } else if (idx > 0 && idx < 4 && !langFi) {
       futureForecast.innerHTML += `
           <div class="next-week">
             <div class="day">
@@ -88,7 +88,7 @@ const getWeatherData = (fi) => {
             </div>
           </div>
           `;
-      console.log('indeksi next', idx);
+      console.log('english sää',idx);
     }
   });
 };
