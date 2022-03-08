@@ -1,3 +1,736 @@
+@font-face {
+  font-family: normaaliteksti;
+  src: url(fonts/Roboto-Regular.ttf);
+}
+
+@font-face {
+  font-family: boldattuteksti;
+  src: url(fonts/Roboto-Bold.ttf);
+}
+
+/* PERUS TYYLITTELYT */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --metropolia-oranssi: #e85d0c;
+  --metropolia-harmaa: #696b6f;
+  --hsl-sininen: #307ac3;
+  --background-color: rgb(245, 245, 245);
+}
+
 body {
-  margin: 10%;
+  background-color: rgb(245, 245, 245);
+  font-family: normaaliteksti;
+  height: 100vh;
+  width: 100%;
+}
+
+.hideOverflow {
+  overflow: hidden;
+}
+
+/* NAVIGAATIO */
+
+.logo {
+  width: 200px;
+  margin: 0 25px;
+}
+
+.language-container {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.language {
+  width: 50px;
+  margin: 0 10px;
+}
+
+.arrowdown {
+  display: block;
+  width: 15px;
+  margin-right: 25px;
+  cursor: pointer;
+}
+
+nav {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-container {
+  height: 4.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+}
+
+.nav-container li {
+  padding: 5px 10px;
+}
+
+.nav-container li a {
+  color: black;
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.active {
+  font-family: boldattuteksti;
+  letter-spacing: 2px;
+  color: white !important;
+  background-color: var(--metropolia-oranssi);
+  border-radius: 10px;
+}
+
+/* .n-link {
+  color: black;
+  font-size: 1.2em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 10px;
+} */
+
+/* GRID */
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-rows: 45vh 45vh;
+  column-gap: 25px;
+  row-gap: 1px;
+  margin: 0 20px;
+  justify-items: center;
+}
+
+/* KORTIT */
+
+.card {
+  margin: 10px;
+  box-shadow: rgba(61, 61, 61, 0.4) 0px 2px 8px 0px;
+  border-radius: 10px;
+  width: 100%;
+  height: auto;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.card-header {
+  display: flex;
+  flex-flow: column;
+  align-items: flex-start;
+  padding-left: 20px;
+}
+
+.card-header h2 {
+  text-transform: uppercase;
+  font-family: boldattuteksti;
+  letter-spacing: 1px;
+  color: var(--metropolia-oranssi);
+}
+
+.campus {
+  margin-top: 3px;
+  font-family: boldattuteksti;
+  font-size: 1em;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  color: var(--metropolia-harmaa);
+}
+
+.card-content {
+  background-color: white;
+  height: 100%;
+  padding: 18px 10px;
+  flex-basis: 70%;
+  display: flex;
+  flex-flow: column;
+  font-size: 1em;
+}
+
+.small {
+  padding: 18px 0;
+  width: 100%;
+}
+
+.small-header {
+  padding-left: 0;
+}
+
+.card-small-text {
+  padding-left: 0 !important;
+  text-align: center;
+}
+
+.card-img-container {
+  flex-basis: 30%;
+  height: 100%;
+  width: 200px;
+  overflow: hidden;
+  cursor: pointer;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-text {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+/* INFO -KORTTI */
+
+.info-text {
+  font-size: 1em;
+  line-height: 1.3em;
+  overflow-y: auto;
+  padding-right: 10px;
+  margin-right: 10px;
+}
+
+/* SÄÄ -KORTTI */
+
+.weather-content {
+  display: flex;
+  align-items: center;
+}
+.temp,
+.description::first-letter {
+  margin-bottom: 5px;
+  text-align: center;
+  text-transform: capitalize;
+}
+.description {
+  margin-bottom: 15px;
+  font-size: 1em;
+}
+svg {
+  fill: black;
+}
+
+.day {
+  text-align: center;
+  font-size: 0.7em;
+  text-transform: capitalize;
+}
+
+.weather-today,
+.next-week {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.next-week {
+  flex-flow: column;
+  flex-direction: row;
+}
+.icon-future {
+  /* margin: 5px 0 5px 0; */
+  width: 50%;
+}
+.icon-now {
+  /* margin: 5px 0 5px 0; */
+  width: 70%;
+}
+
+.change {
+  padding: 0;
+}
+
+/* AIKA JA PÄIVÄ */
+
+.date-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: none;
+}
+
+.date-day-container {
+  margin: 0 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.weekday {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-family: boldattuteksti;
+  color: var(--metropolia-oranssi);
+}
+
+.date {
+  color: var(--metropolia-harmaa);
+  font-family: boldattuteksti;
+}
+
+.time {
+  font-size: 1.5em;
+  font-family: boldattuteksti;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  color: var(--metropolia-oranssi);
+  background-color: white;
+  border-radius: 10px;
+  padding: 5px 10px;
+}
+
+/* MENU -KORTTI */
+
+.menu-list {
+  margin-top: 2px;
+  list-style: none;
+  padding-left: 20px;
+  overflow: auto;
+}
+
+.restaurant-prices {
+  margin-top: 0;
+  padding-top: 0;
+  font-size: 0.7em;
+  text-transform: uppercase;
+  color: var(--metropolia-harmaa);
+}
+
+.menu-course {
+  margin-top: 7px;
+  font-size: 1em;
+  padding-right: 5px;
+}
+
+.menu-price {
+  color: var(--metropolia-oranssi);
+  list-style: none;
+  font-size: 0.8em;
+  margin-top: 0;
+}
+
+/* HSL -KORTTI*/
+
+.transitarea {
+  background-color: var(--hsl-sininen);
+  position: relative;
+}
+
+.hsl-content {
+  background-color: var(--hsl-sininen);
+  display: flex;
+  align-items: center;
+  color: white;
+}
+
+.hsl-content h2 {
+  color: white;
+}
+.hsl-page {
+  width: 90%;
+}
+
+.hsl-headings {
+  display: flex;
+  margin-top: 10px;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  padding-bottom: 5px;
+  font-size: 1.1em;
+}
+
+.transport-info {
+  display: flex;
+  margin: 10px 0;
+  justify-content: space-between;
+  border-bottom: 1px solid;
+  padding-bottom: 8px;
+}
+
+#full-width {
+  flex-basis: 100%;
+}
+
+#bus-destination {
+  flex: 1;
+  text-align: center;
+  font-size: 0.9em;
+}
+
+#bus-nmbr {
+  width: 3.1em;
+  /* height: 1.5em; */
+  border: 2px solid #fff;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#hsl-stop {
+  display: flex;
+  flex-flow: row;
+  column-gap: 10px;
+}
+
+.stop-address {
+  color: white;
+  margin-bottom: 5px;
+}
+
+.dest {
+  padding-left: 20px;
+}
+
+/* HAMPPARI MENU */
+
+.down-arrow {
+  width: 15px;
+  margin-left: 15px;
+}
+
+.nav-label {
+  display: none;
+  position: absolute;
+  left: 250px;
+  top: 10px;
+  width: 40px;
+  line-height: 4.5rem;
+  margin-left: 15px;
+  z-index: 151;
+}
+
+.language-list {
+  display: none;
+}
+
+.language-list-item {
+  list-style: none;
+  cursor: pointer;
+}
+
+#toggleCheckLanguage {
+  display: none;
+  width: 40px;
+}
+
+#toggleCheckLanguage:checked + .language-list {
+  display: block;
+  padding: 10px;
+  position: absolute;
+  top: 4.5rem;
+  right: 1.25rem;
+  z-index: 200;
+  background-color: white;
+  border: 1px solid rgb(207, 207, 207);
+  border-radius: 10px;
+}
+
+#toggleCheck {
+  display: none;
+  width: 40px;
+}
+
+.grey {
+  width: 100%;
+  height: 100vh;
+  background-color: #40454b;
+  opacity: 50%;
+  position: absolute;
+  top: 7rem;
+  display: none;
+  z-index: 150;
+}
+
+/* SCROLLBAR */
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: white rgb(211, 211, 211);
+}
+
+/* Works on Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: white;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: rgb(211, 211, 211);
+  border-radius: 10px;
+}
+
+/* MEDIASÄÄNNÖT */
+
+@media screen and (min-width: 1900px) {
+  nav {
+margin: 15px 0;
+  }
+
+  .arrowdown {
+    display: none;
+  }
+
+  .language {
+    margin: 0 25px;
+  }
+
+  .card-content {
+    padding: 18px 5px;
+  }
+
+  .logo {
+    width: 300px;
+  }
+
+  body {
+    font-size: 1.5em;
+  }
+
+  .menu-course {
+    font-size: 0.65em;
+    padding-bottom: 2px;
+    border-bottom: 1px solid rgb(201, 201, 201);
+    margin-right: 20px;
+  }
+
+  .menu-price {
+    font-size: 0.53em;
+    float: right;
+    margin-top: -16px;
+    margin-right: 20px;
+  }
+
+  .restaurant-prices {
+    margin-bottom: 5px;
+  }
+
+  .hsl-page {
+    margin-top: 5px;
+  }
+
+  .transport-info {
+    margin: 15px 0;
+    padding-bottom: 15px;
+  }
+
+  #city-subtitle {
+    margin-bottom: 20px;
+  }
+
+  .next-week {
+    margin-top: 20px;
+  }
+
+  .icon-future {
+    /* margin: 5px 0 5px 0; */
+    width: 60%;
+  }
+  .icon-now {
+    /* margin: 5px 0 5px 0; */
+    width: 80%;
+  }
+
+  .days {
+    font-size: 1em;
+  }
+
+}
+
+@media screen and (max-width: 1100px) {
+  .date-container {
+    display: none;
+  }
+
+  .info-text {
+    margin-right: 0;
+    padding-right: 10px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .grid-container {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    column-gap: 30px;
+    row-gap: 10px;
+  }
+
+  .nav-label {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    font-family: boldattuteksti;
+    text-transform: uppercase;
+    font-size: 1.2em;
+    letter-spacing: 1.2px;
+    color: var(--metropolia-oranssi);
+    border: 1px solid var(--metropolia-oranssi);
+    background-color: white;
+    border-radius: 10px;
+    padding: 5px;
+    width: 200px;
+    height: 50px;
+  }
+
+  nav {
+    height: 4.5rem;
+  }
+
+  main {
+    margin-top: 1rem;
+  }
+
+  .info-text {
+    font-size: 1.1em;
+    line-height: 1.25em;
+  }
+
+  .menu-list {
+    font-size: 1.1em;
+  }
+
+  .nav-container {
+    padding: 0 50px 15px 270px;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    top: 4.5rem;
+    flex-flow: column;
+    z-index: 200;
+    background-color: var(--background-color);
+    display: none;
+    border-radius: 20px;
+  }
+
+  .nav-container li {
+    padding-top: 20px;
+  }
+
+  #toggleCheck:checked + .nav-container {
+    display: block;
+  }
+
+  #toggleCheck:checked ~ .grey {
+    display: block;
+  }
+
+  .infoarea {
+    order: 1;
+  }
+
+  .luncharea {
+    order: 2;
+  }
+
+  .transitarea {
+    order: 4;
+  }
+
+  .weatherarea {
+    order: 3;
+  }
+  .day {
+    font-size: 0.8em;
+  }
+  .icon-now {
+    width: 100%;
+  }
+  .icon-future {
+    width: 75%;
+  }
+  .temp,
+  .description {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .nav-label {
+    top: 55px;
+    left: 34px;
+    width: 160px;
+    height: 30px;
+    font-size: 1em;
+    border-radius: 8px;
+    border: none;
+    background-color: var(--background-color);
+  }
+
+  .nav-container {
+    padding: 0 50px 15px 50px;
+    top: 5.5rem;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .down-arrow {
+    margin-left: 5px;
+  }
+
+  main {
+    margin-top: 2rem;
+  }
+
+  .card {
+    flex-flow: column;
+  }
+
+  .card-img-container {
+    width: 100%;
+    overflow: visible;
+  }
+
+  .card-content {
+    padding: 18px 15px;
+    width: 100%;
+  }
+
+  .menu-list {
+    padding-left: 10px;
+  }
+
+  .menu-price {
+    font-size: 0.7em;
+  }
+
+  .card-img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  .card-text {
+    padding: 0 10px;
+  }
+
+  .card-header {
+    padding: 0 10px;
+  }
 }

@@ -1,15 +1,116 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="assets/styles.css">
-  </head>
-  <body>
-    <p>
-      Hello! Open the developer tools, please.<br />
-      Start by editing the files in <code>src/</code> folder.
-      <p> Henna branch </p>
-    </p>
-  </body>
+
+<head>
+  <meta charset="utf-8" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body>
+  <!-- Navigaatio -->
+  <nav>
+    <div>
+      <a href="#">
+        <img class="logo" src="assets/img/metropolia_logo.svg" alt="metropolian logo">
+      </a>
+    </div>
+
+    <label class="nav-label" for="toggleCheck"></label>
+    <input type="checkbox" id="toggleCheck">
+
+    <ul class="nav-container">
+      <li class="nav-link"><a id="karamalmi" class="n-link" href="#">Karamalmi</a></li>
+      <li class="nav-link"><a id="myyrmaki" class="n-link" href="#">Myyrmäki</a></li>
+      <li class="nav-link"><a id="myllypuro" class="n-link" href="#">Myllypuro</a></li>
+      <li class="nav-link"><a id="arabia" class="n-link" href="#">Arabia</a></li>
+    </ul>
+
+    <div class="date-container">
+      <div class="time" id="time"></div>
+      <div class="date-day-container">
+        <div class="weekday" id="weekday"></div>
+        <div class="date" id="date"></div>
+      </div>
+    </div>
+
+    <div class="language-container">
+      <img class="language currentLang" src="assets/img/finland.png" alt="suomen lippu">
+      <label class="language-label" for="toggleCheckLanguage"><img class="arrowdown" src="assets/img/simple-arrow.png"
+          alt="nuoli alaspäin"></label>
+      <input type="checkbox" id="toggleCheckLanguage">
+      <ul class="language-list">
+        <li class="language-list-item"><img class="language switchLang" src="assets/img/united-kingdom.png"
+            alt="britannian lippu">
+        </li>
+      </ul>
+    </div>
+    <div class="grey"></div>
+  </nav>
+
+  <main>
+    <div class="grid-container">
+      <!-- Koronatiedote -->
+      <article class="card infoarea">
+        <div class="card-img-container">
+          <img class="card-img" src="assets/img/koronatiedote.webp" alt="kuva koronamaskista">
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="info-topic"></h2>
+            <h3 class="campus info-date"></h3>
+          </div>
+          <p class="card-text info-text"></p>
+        </div>
+      </article>
+      <!-- Sää -->
+      <article class="card weatherarea">
+        <div class="card-content weather-content">
+          <div class="card-header change">
+            <h2 class="city" id="weather-change">Sää</h2>
+          </div>
+          <h3 class="campus" id="city-subtitle"></h3>
+          <div class="weather-today" id="weather-today"></div>
+          <div class="next-week" id="next-week">
+            <div class="future-forecast"></div>
+          </div>
+        </div>
+      </article>
+      <!-- Ruokalista -->
+      <article class="card luncharea">
+        <div class="card-img-container">
+          <img class="card-img" src="assets/img/ruokakuva.webp" alt="kuva ruuasta">
+        </div>
+        <div class="card-content">
+          <div class="card-header">
+            <h2 class="lunch-topic"></h2>
+            <h3 class="campus restaurant"></h3>
+            <h4 class="restaurant-prices"></h4>
+          </div>
+          <ul class="menu-list">
+          </ul>
+        </div>
+      </article>
+      <!-- HSL -->
+      <article class="card transitarea">
+        <div class="card-content hsl-content" id="full-width">
+          <div class="card-header small-header">
+            <h2>HSL</h2>
+          </div>
+          <h3 class="campus stop-address" id="find-stop"></h3>
+          <div class="hsl-page">
+            <div class="hsl-headings">
+              <div class="route"></div>
+              <div class="dest"></div>
+              <div class="leaving"></div>
+            </div>
+            <div class="hsl-stuff">
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </main>
+</body>
+
 </html>
