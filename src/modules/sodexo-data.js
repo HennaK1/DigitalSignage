@@ -12,6 +12,7 @@ const parseSodexoMenu = (menu) => {
   const coursesEn = [];
   const coursesFi = [];
   const prices = [];
+  const diets = [];
   const courses = Object.values(menu);
   for (const course of courses) {
     const diet = course.dietcodes;
@@ -20,13 +21,13 @@ const parseSodexoMenu = (menu) => {
       coursesEn.push(course.title_en);
       coursesFi.push(course.title_fi);
     } else {
-      coursesEn.push(course.title_en + ' (' + diet + ')');
-      coursesFi.push(course.title_fi + ' (' + diet + ')');
+      coursesEn.push(course.title_en);
+      coursesFi.push(course.title_fi);
     }
-
     prices.push(price);
+    diets.push(' (' + diet + ')');
   }
-  return [coursesFi, coursesEn, prices];
+  return [coursesFi, coursesEn, prices, diets];
 };
 
 const SodexoData = { parseSodexoMenu, sodexoMyyrmakiDataUrl, sodexoMyllypuroDataUrl };

@@ -97,16 +97,6 @@ nav {
   border-radius: 10px;
 }
 
-/* .n-link {
-  color: black;
-  font-size: 1.2em;
-  letter-spacing: 0.5px;
-  text-transform: uppercase;
-  text-decoration: none;
-  cursor: pointer;
-  padding: 10px;
-} */
-
 /* GRID */
 
 .grid-container {
@@ -332,6 +322,10 @@ svg {
   margin-top: 0;
 }
 
+span {
+  font-size: 0.82em;
+}
+
 /* HSL -KORTTI*/
 
 .transitarea {
@@ -488,7 +482,7 @@ svg {
 
 @media screen and (min-width: 1900px) {
   nav {
-margin: 15px 0;
+    margin: 15px 0;
   }
 
   .arrowdown {
@@ -523,6 +517,10 @@ margin: 15px 0;
     float: right;
     margin-top: -16px;
     margin-right: 20px;
+  }
+
+  span {
+    font-size: 0.65em;
   }
 
   .restaurant-prices {

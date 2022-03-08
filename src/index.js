@@ -131,7 +131,8 @@ const renderFazerKaramalmi = (fi) => {
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
       const menu = course[0];
       const prices = course[1];
-      showMenu(menu, menuList, prices);
+      const diets = course[2];
+      showMenu(menu, menuList, prices, diets);
     });
   } else {
     lunchTopic.textContent = `Today's lunch`;
@@ -141,7 +142,8 @@ const renderFazerKaramalmi = (fi) => {
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
       const menu = course[0];
       const prices = course[1];
-      showMenu(menu, menuList, prices);
+      const diets = course[2];
+      showMenu(menu, menuList, prices, diets);
     });
   }
 };
@@ -162,7 +164,8 @@ const renderFazerArabia = (fi) => {
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
       const menu = course[0];
       const prices = course[1];
-      showMenu(menu, menuList, prices);
+      const diets = course[2];
+      showMenu(menu, menuList, prices, diets);
     });
   } else {
     lunchTopic.textContent = `Today's lunch`;
@@ -172,7 +175,8 @@ const renderFazerArabia = (fi) => {
       let course = FazerData.parseFazerMenu(menuData.LunchMenus, getTodayIndex());
       const menu = course[0];
       const prices = course[1];
-      showMenu(menu, menuList, prices);
+      const diets = course[2];
+      showMenu(menu, menuList, prices, diets);
     });
   }
 };
@@ -196,12 +200,13 @@ const renderSodexoMyyrmaki = (fi) => {
     const coursesFi = courses[0];
     const coursesEn = courses[1];
     const prices = courses[2];
+    const diets = courses[3];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
-      showMenu(coursesFi, menuList, prices);
+      showMenu(coursesFi, menuList, prices, diets);
     } else {
       lunchTopic.textContent = `Today's lunch`;
-      showMenu(coursesEn, menuList, prices);
+      showMenu(coursesEn, menuList, prices, diets);
     }
   });
 };
@@ -224,12 +229,13 @@ const renderSodexoMyllypuro = (fi) => {
     const coursesFi = courses[0];
     const coursesEn = courses[1];
     const prices = courses[2];
+    const diets = courses[3];
     if (fi === true) {
       lunchTopic.textContent = `Päivän lounas`;
-      showMenu(coursesFi, menuList, prices);
+      showMenu(coursesFi, menuList, prices, diets);
     } else {
       lunchTopic.textContent = `Today's lunch`;
-      showMenu(coursesEn, menuList, prices);
+      showMenu(coursesEn, menuList, prices, diets);
     }
   });
 };
@@ -242,16 +248,16 @@ const renderSodexoMyllypuro = (fi) => {
  * @param {array} menuList list of courses
  * @param {array} prices list of prices
  */
-const showMenu = (courses, menuList, prices) => {
+const showMenu = (courses, menuList, prices, diets) => {
   menuList.innerHTML = ``;
   for (let i = 0; i < courses.length; i++) {
     if (prices[i] === null) {
       menuList.innerHTML += `
-      <li class="menu-course">${courses[i]}</li>
+      <li class="menu-course">${courses[i]} <span>${diets[i]}</span></li>
       `;
     } else {
       menuList.innerHTML += `
-      <li class="menu-course">${courses[i]}</li>
+      <li class="menu-course">${courses[i]} <span>${diets[i]}</span></li>
       <li class="menu-price">${prices[i]}</li>
       `;
     }

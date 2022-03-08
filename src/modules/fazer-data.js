@@ -12,6 +12,7 @@ const fazerLunchMenuArabiaEnUrl = `https://www.foodandco.fi/api/restaurant/menu/
  */
 const parseFazerMenu = (menu, dayOfWeek) => {
   const course = [];
+  const diets = [];
   const prices = [];
   const setMenus = menu[dayOfWeek].SetMenus;
   for (const setMenu of setMenus) {
@@ -20,11 +21,12 @@ const parseFazerMenu = (menu, dayOfWeek) => {
     for (const meal of meals) {
       const name = meal.Name;
       const diet = meal.Diets;
-      course.push(name + ' (' + diet.toString().replaceAll(',', ', ') + ')');
+      course.push(name);
+      diets.push(' (' + diet.toString().replaceAll(',', ', ') + ')');
       prices.push(price);
     }
   }
-  return [course, prices];
+  return [course, prices, diets];
 };
 
 
