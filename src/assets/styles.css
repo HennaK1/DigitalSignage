@@ -731,4 +731,8 @@ span {
   .card-header {
     padding: 0 10px;
   }
+
+  .hsl-page {
+    width: 100%;
+  }
 }
