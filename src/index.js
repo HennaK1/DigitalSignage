@@ -103,12 +103,12 @@ setInterval(() => {
 weatherData.getWeatherData(langFi);
 
 /**
- * Update weather every 30 minutes
+ * Update weather every 30 minutes. In comment because we had too many api calls and they demanded a fee :)
  */
-setInterval(() => {
-  weatherData.getWeatherData();
-  console.log('sää', weatherData.getWeatherData);
-}, 1800000);
+// setInterval(() => {
+//   weatherData.getWeatherData();
+//   console.log('sää', weatherData.getWeatherData);
+// }, 1800000);
 
 
 /**

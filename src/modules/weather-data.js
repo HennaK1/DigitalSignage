@@ -7,7 +7,7 @@ const myyrmakiBtn = document.querySelector('#myyrmaki');
 const myllypuroBtn = document.querySelector('#myllypuro');
 const arabiaBtn = document.querySelector('#arabia');
 
-const apiKey = 'c042c0bcea83f22bde97ce234ae8c4f7';
+const apiKey = 'a780aec63d26475dc332d6581f98a0b3';
 
 /**
  * Weather based of campus coordinates
@@ -27,69 +27,69 @@ const getWeatherData = (fi) => {
     let latitude = 60.224097114822314;
     let longitude = 24.758621186912713;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data karaportti', data);
-      showWeatherData(data, fi);
-    });
-  } else if (karamalmiBtn.classList.contains('active')){
+      .then(res => res.json()).then(data => {
+        console.log('weather-data karaportti', data);
+        showWeatherData(data, fi);
+      });
+  } else if (karamalmiBtn.classList.contains('active')) {
     let latitude = 60.224097114822314;
     let longitude = 24.758621186912713;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data karaportti enkku', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data karaportti enkku', data);
+        showWeatherData(data, fi);
+      });
     // Myyräki
   } else if (myyrmakiBtn.classList.contains('active') && fi) {
     let latitude = 60.25884867471396;
     let longitude = 24.844753125550763;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data myrtsi', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data myrtsi', data);
+        showWeatherData(data, fi);
+      });
   } else if (myyrmakiBtn.classList.contains('active')) {
     let latitude = 60.25884867471396;
     let longitude = 24.844753125550763;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data myrtsi enkku', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data myrtsi enkku', data);
+        showWeatherData(data, fi);
+      });
     // Myllypuro
   } else if (myllypuroBtn.classList.contains('active') && fi) {
     let latitude = 60.223621656949845;
     let longitude = 25.07790114089043;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data myltsi', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data myltsi', data);
+        showWeatherData(data, fi);
+      });
   } else if (myllypuroBtn.classList.contains('active')) {
     let latitude = 60.223621656949845;
     let longitude = 25.07790114089043;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data myltsi enkku', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data myltsi enkku', data);
+        showWeatherData(data, fi);
+      });
     // Arabia
   } else if (arabiaBtn.classList.contains('active') && fi) {
     let latitude = 60.21003815822953;
     let longitude = 24.976775827395574;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=fi&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data arabia', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data arabia', data);
+        showWeatherData(data, fi);
+      });
   } else if (arabiaBtn.classList.contains('active')) {
     let latitude = 60.21003815822953;
     let longitude = 24.976775827395574;
     fetch(`https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&lang=en&exclude=hourly,minutely&units=metric&appid=${apiKey}`)
-    .then(res => res.json()).then(data => {
-      console.log('weather-data arabia', data);
-      showWeatherData(data, fi);
-    });
+      .then(res => res.json()).then(data => {
+        console.log('weather-data arabia', data);
+        showWeatherData(data, fi);
+      });
   }
 };
 
@@ -143,7 +143,7 @@ const showWeatherData = (data, fi) => {
             </div>
           </div>
           `;
-      console.log('english sää',idx);
+      console.log('english sää', idx);
     }
   });
 };
