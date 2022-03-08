@@ -4,9 +4,9 @@
 const todayISODate = new Date().toISOString().split('T')[0];
 
 /**
- * TODO: add description
+ * Function to get weekday's index
  *
- * @returns
+ * @returns weekday's index
  */
 const getTodayIndex = () => {
   let weekDayIndex = new Date().getDay();
