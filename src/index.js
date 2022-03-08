@@ -100,7 +100,6 @@ setInterval(() => {
 /**
  * WEATHER AREA
  */
-
 weatherData.getWeatherData(langFi);
 
 /**
@@ -322,6 +321,7 @@ const showCampusKaramalmi = () => {
   mobileBtn.innerHTML = `Karamalmi <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderFazerKaramalmi(langFi);
   HSLData.getHSLData(langFi);
+  weatherData.getWeatherData(langFi);
 };
 
 const showCampusMyyrmaki = () => {
@@ -329,6 +329,7 @@ const showCampusMyyrmaki = () => {
   mobileBtn.innerHTML = `Myyrmäki <img class="down-arrow" src="assets/img/simple-arrow-orange.png" alt="arrow-down">`;
   renderSodexoMyyrmaki(langFi);
   HSLData.getHSLData(langFi);
+  weatherData.getWeatherData(langFi);
 };
 
 const showCampusMyllypuro = () => {
@@ -336,6 +337,7 @@ const showCampusMyllypuro = () => {
   myllypuroBtn.classList.add('active');
   renderSodexoMyllypuro(langFi);
   HSLData.getHSLData(langFi);
+  weatherData.getWeatherData(langFi);
 };
 
 const showCampusArabia = () => {
@@ -343,6 +345,7 @@ const showCampusArabia = () => {
   arabiaBtn.classList.add('active');
   renderFazerArabia(langFi);
   HSLData.getHSLData(langFi);
+  weatherData.getWeatherData(langFi);
 };
 
 /**

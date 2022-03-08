@@ -648,7 +648,7 @@ svg {
     order: 3;
   }
   .day {
-    font-size: 1em;
+    font-size: 0.8em;
   }
   .icon-now {
     width: 100%;
@@ -658,7 +658,7 @@ svg {
   }
   .temp,
   .description {
-    font-size: 1.1em;
+    font-size: 1em;
   }
 }
 
