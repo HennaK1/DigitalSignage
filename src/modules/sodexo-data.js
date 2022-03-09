@@ -18,14 +18,13 @@ const parseSodexoMenu = (menu) => {
     const diet = course.dietcodes;
     const price = course.price;
     if (course.dietcodes === undefined) {
-      coursesEn.push(course.title_en);
-      coursesFi.push(course.title_fi);
+      diets.push('');
     } else {
-      coursesEn.push(course.title_en);
-      coursesFi.push(course.title_fi);
+      diets.push(' (' + diet + ')');
     }
+    coursesEn.push(course.title_en);
+    coursesFi.push(course.title_fi);
     prices.push(price);
-    diets.push(' (' + diet + ')');
   }
   return [coursesFi, coursesEn, prices, diets];
 };
