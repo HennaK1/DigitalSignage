@@ -3,7 +3,7 @@
 ## Project Description
 
 This is a project for our course "Web technologies and media platforms". 
-Goal was to build an info display for Metropolia with Digital Signage and Progressive Web App user interfaces.
+Goal was to build responsive info display for Metropolia with Digital Signage and Progressive Web App user interfaces.
 
 
 ## Screenshots
