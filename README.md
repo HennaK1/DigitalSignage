@@ -28,6 +28,15 @@ Simple boilerplate for [Webpack](https://webpack.js.org/guides/getting-started) 
 
 ES6+ without any babeling/transpilers/polyfills. Only for [modern browsers](https://kangax.github.io/compat-table/es6/).
 
+## API
+
+This project uses few apis:
+
+- [OpenWeatherMap](https://openweathermap.org/)
+- [Digitransit Routing](https://digitransit.fi/en/developers/apis/1-routing-api/)
+- [Foodandco](https://www.foodandco.fi/)
+- [Sodexo](https://www.sodexo.fi/)
+
 
 ## Authors
 
